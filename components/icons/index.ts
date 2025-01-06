@@ -7,4 +7,5 @@ export { IconBrandYoutube } from "./Youtube"
 export { IconBrandTikTok } from "./TikTok"
 export { IconBrandFacebook } from "./Facebook"
 
-export { type IconProps } from "./icons"
+export { type IconProps } from "./types"
+export { type SocialMedia } from "./types"
