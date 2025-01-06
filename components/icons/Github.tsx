@@ -16,5 +16,3 @@ export const IconBrandGithub = ({ ...props }: IconProps) => (
     />
   </svg>
 )
-
-export default IconBrandGithub

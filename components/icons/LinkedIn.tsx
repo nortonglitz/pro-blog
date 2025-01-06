@@ -30,5 +30,3 @@ export const IconBrandLinkedIn = ({ ...props }: IconProps) => (
     </g>
   </svg>
 )
-
-export default IconBrandLinkedIn
