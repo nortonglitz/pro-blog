@@ -5,17 +5,15 @@ import Link from "next/link"
 import { IconSocialLink } from "@/components"
 import { useState } from "react"
 import { SocialMedia } from "@/components/icons"
-
-const LINKS = ["About me", "Projects", "Contact"]
+import { LINKS } from "@/content"
 
 export const Sidebar = () => {
   const [activeLink, setActiveLink] = useState(LINKS[0])
+  const linksId = LINKS.map(title => title.replace(" ", "-").toLocaleLowerCase())
 
   return (
     <aside
       className="
-        fixed
-        w-56
         border-black
         h-screen
         py-10
@@ -59,7 +57,7 @@ export const Sidebar = () => {
               <Link
                 className="transition w-full h-full block py-3 pointer-events-auto hover:scale-110"
                 onClick={() => setActiveLink(title)}
-                href={`#${title.split(" ").join("-").toLocaleLowerCase()}`}
+                href={`#${linksId[i]}`}
                 key={`side-nav-${i}`}
               >
                 {title}
