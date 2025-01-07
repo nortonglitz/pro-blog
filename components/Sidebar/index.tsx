@@ -50,11 +50,10 @@ export const Sidebar = () => {
                   border-b
                   border-b-neutral-800
                   border-r-2
-                  border-r-transparent
                   pointer-events-none
 
                   last:border-b-0
-                  ${activeLink === title ? "border-r-emerald-500 bg-white/10 font-semibold" : ""}
+                  ${activeLink === title ? "border-r-emerald-500 bg-white/10 font-semibold" : "border-r-transparent"}
                 `}
             >
               <Link
