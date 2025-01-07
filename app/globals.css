@@ -4,4 +4,30 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: thin; /* Para Firefox: deixa a barra mais fina */
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1); /* Para Firefox: cor da barra e do fundo */
+}
+
+/* Estilo para toda a barra de rolagem */
+::-webkit-scrollbar {
+  width: 8px; /* Largura da barra de rolagem */
+  height: 8px; /* Altura da barra de rolagem horizontal */
+}
+
+/* Fundo da barra de rolagem */
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1); /* Cor de fundo mais transparente */
+  border-radius: 10px; /* Deixa o fundo arredondado */
+}
+
+/* A barra de rolagem em si */
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3); /* Cor da barra */
+  border-radius: 10px; /* Deixa a barra arredondada */
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Bordas transparentes para dar um efeito "inset" */
+}
+
+/* Ao passar o mouse sobre a barra */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5); /* Escurece a barra ao passar o mouse */
 }
