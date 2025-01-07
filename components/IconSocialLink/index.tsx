@@ -40,13 +40,24 @@ export const IconSocialLink = ({
 
   return (
     <Link
-      className="bg-neutral-900 hover:bg-emerald-700 transition h-8 w-8 flex items-center justify-center"
+      className="
+        transition
+        bg-neutral-900
+        h-8
+        w-8
+        flex
+        items-center
+        justify-center
+
+        [&:hover_svg]:text-white
+        hover:bg-emerald-700
+      "
       target={target}
       rel={rel}
       href={href}
       {...props}
     >
-      <Icon className="h-5" />
+      <Icon className="h-5 text-neutral-500 transition" />
     </Link>
   )
 }
