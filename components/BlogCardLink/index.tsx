@@ -7,6 +7,8 @@ export const BlogCardLink = ({ ...props }: BlogCardLinkProps) => (
   <Link {...props}>
     <div
       className="
+        transition-[background]
+        duration-300
         w-full
         h-full
         min-h-96
@@ -15,6 +17,7 @@ export const BlogCardLink = ({ ...props }: BlogCardLinkProps) => (
         justify-center
         flex-col
         border
+        bg-transparent
         border-emerald-900
         hover:bg-emerald-500/10
         hover:outline
