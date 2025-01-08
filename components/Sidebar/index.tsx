@@ -17,7 +17,11 @@ export const Sidebar = () => {
   const linksId = LINKS.map(title => title.replace(" ", "-").toLocaleLowerCase())
 
   useEffect(() => {
-    setIsOpen(!isMobile)
+    if (isMobile === undefined) {
+      setIsOpen(false)
+    } else {
+      setIsOpen(!isMobile)
+    }
   }, [isMobile])
 
   const handleLinkClick = (title: string) => {
@@ -29,19 +33,33 @@ export const Sidebar = () => {
 
   return (
     <>
-      {isMobile && (
-        <header className="fixed top-0 h-16 right-0 left-0 flex justify-between px-10 items-center z-20 drop-shadow bg-neutral-950">
-          <span className="text-3xl font-jura font-bold text-emerald-500">
-            {USER_CONTENT.name.split(" ").map(name => name.charAt(0))}
-          </span>
-          <button onClick={() => setIsOpen(true)}>
-            <IconMenu2
-              size="2rem"
-              stroke="1px"
-            />
-          </button>
-        </header>
-      )}
+      <header
+        className="
+          md:invisible
+          fixed
+          top-0
+          h-16
+          right-0
+          left-0
+          flex
+          justify-between
+          px-10
+          items-center
+          z-20
+          drop-shadow
+          bg-neutral-950
+        "
+      >
+        <span className="text-3xl font-jura font-bold text-emerald-500">
+          {USER_CONTENT.name.split(" ").map(name => name.charAt(0))}
+        </span>
+        <button onClick={() => setIsOpen(true)}>
+          <IconMenu2
+            size="2rem"
+            stroke="1px"
+          />
+        </button>
+      </header>
       <aside
         className={`
           ${isOpen ? "visible" : "invisible"}
