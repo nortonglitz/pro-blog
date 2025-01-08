@@ -43,8 +43,8 @@ export const IconSocialLink = ({
       className="
         transition
         bg-neutral-900
-        h-8
-        w-8
+        h-10
+        w-10
         flex
         items-center
         justify-center
