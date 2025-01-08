@@ -34,7 +34,7 @@ const Title = ({ text }: { text: string }) => (
 
 export default function Home() {
   return (
-    <div className="grid grid-cols-[14rem_1fr]">
+    <div className="md:grid md:grid-cols-[14rem_1fr]">
       <Sidebar />
       <main
         className="
@@ -45,7 +45,8 @@ export default function Home() {
           overflow-auto
 
           [&>section]:pt-20
-          [&>section]:pr-10
+          [&>section]:md:pr-10
+          [&>section]:pr-5
           [&>section]:pl-5
           [&>section:last-child]:pb-20
         "
@@ -54,17 +55,20 @@ export default function Home() {
           id={linksId[0]}
           className="
             flex
+            flex-wrap
             w-full
             items-center
             justify-center
-            gap-40
+            gap-10
+            xl:gap-20
+            2xl:gap-40
             bg-contain
             bg-no-repeat
             bg-bottom
             bg-[url('/backgrounds/wave.svg')]
           "
         >
-          <div className="text-justify max-w-prose">
+          <div className="text-justify max-w-prose md:min-w-[40ch] min-w-full flex-1">
             <header>
               <small className="uppercase text-emerald-500">
                 <TextLoop texts={USER_CONTENT.job} />
@@ -88,6 +92,7 @@ export default function Home() {
             src="/personal.png"
             width={1141}
             height={2177}
+            priority
             alt="personal picture"
           />
         </section>
