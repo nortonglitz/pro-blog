@@ -1,9 +1,27 @@
-import { ButtonLink, Sidebar, BlogCard, TextLoop } from "@/components"
+import { ButtonLink, Sidebar, BlogCard, TextLoop, BlogCardLink } from "@/components"
 import { USER_CONTENT, LINKS, POSTS } from "@/content"
 import Image from "next/image"
 import { useId } from "react"
 
 const linksId = LINKS.map(title => title.replace(" ", "-").toLocaleLowerCase())
+
+const Title = ({ text }: { text: string }) => (
+  <h2
+    className="
+      text-4xl
+      font-bold
+      mb-10
+      uppercase
+      tracking-wider
+      underline-offset-8
+      decoration-[2px]
+      underline
+      decoration-emerald-500
+    "
+  >
+    {text}
+  </h2>
+)
 
 export default function Home() {
   return (
@@ -77,24 +95,10 @@ export default function Home() {
           "
         >
           <header>
-            <h2
-              className="
-                text-4xl
-                font-bold
-                mb-10
-                uppercase
-                tracking-wider
-                underline-offset-8
-                decoration-[2px]
-                underline
-                decoration-emerald-500
-              "
-            >
-              {LINKS[1]}
-            </h2>
+            <Title text={LINKS[1]} />
           </header>
           <div className="grid grid-cols-2 gap-10">
-            {POSTS.slice(0, 8).map(({ title, content, image_url }) => (
+            {POSTS.slice(0, 7).map(({ title, content, image_url }) => (
               <BlogCard
                 key={`blog-card-${useId()}`}
                 title={title}
@@ -102,7 +106,13 @@ export default function Home() {
                 imgUrl={image_url}
               />
             ))}
+            <BlogCardLink href="#" />
           </div>
+        </section>
+        <section id={linksId[linksId.length - 1]}>
+          <header>
+            <Title text={LINKS[LINKS.length - 1]} />
+          </header>
         </section>
       </main>
     </div>
