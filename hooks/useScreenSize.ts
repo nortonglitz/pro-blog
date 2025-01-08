@@ -37,7 +37,7 @@ export const useScreenSize = () => {
   const screen = useMemo(() => chooseScreen(width), [width])
   const isMobile = useMemo(() => {
     if (width) {
-      return width <= 768
+      return width < 768
     }
     return undefined
   }, [width])
