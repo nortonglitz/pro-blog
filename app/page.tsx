@@ -46,8 +46,8 @@ export default function Home() {
 
           [&>section]:pt-20
           [&>section]:md:pr-10
-          [&>section]:pr-5
-          [&>section]:pl-5
+          [&>section]:md:pl-5
+          [&>section]:px-1
           [&>section:last-child]:pb-20
         "
       >
