@@ -18,11 +18,12 @@ export const BlogCard = ({ content, imgUrl, title }: BlogCardProps) => (
       [&:hover_img]:scale-110
     "
   >
-    <figure className="h-96 w-auto relative overflow-hidden">
+    <figure className="h-96 relative overflow-hidden">
       <Image
         className="object-cover transition duration-300"
         src={imgUrl}
         fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
         alt="title image"
       />
       <figcaption className="p-4 absolute bottom-0 left-0 right-0 bg-neutral-950/85">
