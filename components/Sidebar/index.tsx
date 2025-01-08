@@ -17,6 +17,9 @@ export const Sidebar = () => {
         border-black
         h-screen
         py-10
+        flex
+        flex-col
+        justify-between
       "
     >
       <header className="px-4">
@@ -36,7 +39,7 @@ export const Sidebar = () => {
           </h3>
         ))}
       </header>
-      <nav className="mt-10">
+      <nav>
         <ul>
           {LINKS.map((title, i) => (
             <li
@@ -66,7 +69,7 @@ export const Sidebar = () => {
           ))}
         </ul>
       </nav>
-      <footer className="flex justify-center gap-4 mt-10">
+      <footer className="flex justify-center gap-4">
         {Object.entries(USER_CONTENT.socials).map(([social, link], i) => {
           return (
             <IconSocialLink
