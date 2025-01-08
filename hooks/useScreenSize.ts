@@ -3,13 +3,13 @@ import { useState, useEffect, useMemo } from "react"
 type Screen = "sm" | "md" | "lg" | "xl" | "2xl"
 
 const chooseScreen = (width: number): Screen => {
-  if (width <= 640) {
+  if (width < 640) {
     return "sm"
-  } else if (width <= 768) {
+  } else if (width < 768) {
     return "md"
-  } else if (width <= 1024) {
+  } else if (width < 1024) {
     return "lg"
-  } else if (width <= 1280) {
+  } else if (width < 1280) {
     return "xl"
   } else {
     return "2xl"
