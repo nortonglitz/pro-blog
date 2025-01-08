@@ -11,12 +11,11 @@ export const BlogCard = ({ content, imgUrl, title }: BlogCardProps) => (
     className="
       h-full
       bg-neutral-900
-      cursor-pointernt
+      cursor-pointer
       hover:outline
       hover:outline-4
       hover:outline-emerald-500
       [&:hover_img]:scale-110
-      cursor-pointer
     "
   >
     <figure className="h-96 w-auto relative overflow-hidden">
