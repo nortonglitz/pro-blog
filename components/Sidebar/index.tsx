@@ -115,7 +115,7 @@ export const Sidebar = () => {
             ))}
           </ul>
         </nav>
-        <footer className="flex justify-center gap-4">
+        <footer className="flex justify-center gap-8 h-32">
           {Object.entries(USER_CONTENT.socials).map(([social, link], i) => {
             return (
               <IconSocialLink
