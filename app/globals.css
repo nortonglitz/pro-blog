@@ -3,9 +3,12 @@
 @tailwind utilities;
 
 html {
-  scroll-behavior: smooth;
   scrollbar-width: thin; /* Para Firefox: deixa a barra mais fina */
   scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1); /* Para Firefox: cor da barra e do fundo */
+}
+
+* {
+  scroll-behavior: smooth;
 }
 
 /* Estilo para toda a barra de rolagem */
