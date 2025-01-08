@@ -1,6 +1,15 @@
-import { ButtonLink, Sidebar, BlogCard, TextLoop, BlogCardLink } from "@/components"
+import {
+  Sidebar,
+  BlogCard,
+  TextLoop,
+  BlogCardLink,
+  InputText,
+  TextArea,
+  Button
+} from "@/components"
 import { USER_CONTENT, LINKS, POSTS } from "@/content"
 import Image from "next/image"
+import Link from "next/link"
 import { useId } from "react"
 
 const linksId = LINKS.map(title => title.replace(" ", "-").toLocaleLowerCase())
@@ -34,11 +43,11 @@ export default function Home() {
           flex-col
           h-screen
           overflow-auto
-          py-20
 
-          [&>section:not(:first-child)]:pt-20
+          [&>section]:pt-20
           [&>section]:pr-10
           [&>section]:pl-5
+          [&>section:last-child]:pb-20
         "
       >
         <section
@@ -70,12 +79,9 @@ export default function Home() {
                 {paragraph}
               </p>
             ))}
-            <ButtonLink
-              href={`#${linksId[linksId.length - 1]}`}
-              className="mt-10"
-            >
-              Contact me
-            </ButtonLink>
+            <Link href={`#${linksId[linksId.length - 1]}`}>
+              <Button className="mt-10">Contact me</Button>
+            </Link>
           </div>
           <Image
             className="h-auto w-64 border border-emerald-950 bg-white/5"
@@ -97,7 +103,7 @@ export default function Home() {
           <header>
             <Title text={LINKS[1]} />
           </header>
-          <div className="grid grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 gap-10">
             {POSTS.slice(0, 7).map(({ title, content, image_url }) => (
               <BlogCard
                 key={`blog-card-${useId()}`}
@@ -109,10 +115,39 @@ export default function Home() {
             <BlogCardLink href="#" />
           </div>
         </section>
-        <section id={linksId[linksId.length - 1]}>
+        <section
+          className="
+            bg-contain
+            bg-no-repeat
+            bg-bottom
+            bg-[url('/backgrounds/wave.svg')]"
+          id={linksId[linksId.length - 1]}
+        >
           <header>
             <Title text={LINKS[LINKS.length - 1]} />
           </header>
+          <div className="flex justify-center">
+            <form className="flex flex-col w-[60ch] gap-5">
+              <InputText
+                type="email"
+                placeholder="E-mail"
+              />
+              <InputText
+                type="text"
+                placeholder="Subject"
+              />
+              <TextArea
+                rows={10}
+                placeholder="Type your message"
+              />
+              <Button
+                type="submit"
+                className="self-end"
+              >
+                Send message
+              </Button>
+            </form>
+          </div>
         </section>
       </main>
     </div>
