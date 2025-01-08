@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 
 type Screen = "sm" | "md" | "lg" | "xl" | "2xl"
 
-const chooseScreen = (width: number) => {
+const chooseScreen = (width: number): Screen => {
   if (width <= 640) {
     return "sm"
   } else if (width <= 768) {
@@ -17,17 +17,21 @@ const chooseScreen = (width: number) => {
 }
 
 export const useScreenSize = () => {
-  const [screen, setScreen] = useState<Screen>(chooseScreen(window.innerWidth))
+  const [width, setWidth] = useState(window.innerWidth)
 
   useEffect(() => {
     const handleResize = () => {
-      setScreen(chooseScreen(window.innerWidth))
+      setWidth(window.innerWidth)
     }
+
     window.addEventListener("resize", handleResize)
     handleResize()
 
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
-  return screen
+  const screen = useMemo(() => chooseScreen(width), [width])
+  const isMobile = useMemo(() => width <= 768, [width])
+
+  return { screen, width, isMobile }
 }
