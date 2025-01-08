@@ -1,8 +1,7 @@
-import { ButtonLink, Sidebar } from "@/components"
-import { USER_CONTENT } from "@/content"
+import { ButtonLink, Sidebar, BlogCard, TextLoop } from "@/components"
+import { USER_CONTENT, LINKS, POSTS } from "@/content"
 import Image from "next/image"
-import { TextLoop } from "@/components"
-import { LINKS } from "@/content"
+import { useId } from "react"
 
 const linksId = LINKS.map(title => title.replace(" ", "-").toLocaleLowerCase())
 
@@ -10,7 +9,20 @@ export default function Home() {
   return (
     <div className="grid grid-cols-[14rem_1fr]">
       <Sidebar />
-      <main className="flex-1 h-screen overflow-auto mt-20">
+      <main
+        className="
+          flex-1
+          flex
+          flex-col
+          h-screen
+          overflow-auto
+          py-20
+
+          [&>section:not(:first-child)]:pt-20
+          [&>section]:pr-10
+          [&>section]:pl-5
+        "
+      >
         <section
           id={linksId[0]}
           className="
@@ -48,7 +60,7 @@ export default function Home() {
             </ButtonLink>
           </div>
           <Image
-            className="h-auto w-64"
+            className="h-auto w-64 border border-emerald-950 bg-white/5"
             src="/personal.png"
             width={1141}
             height={2177}
@@ -58,10 +70,6 @@ export default function Home() {
         <section
           id={linksId[1]}
           className="
-            flex
-            items-center
-            justify-center
-            gap-40
             bg-contain
             bg-no-repeat
             bg-top
@@ -69,8 +77,32 @@ export default function Home() {
           "
         >
           <header>
-            <h2 className="text-4xl font-bold mb-10">{LINKS[1]}</h2>
+            <h2
+              className="
+                text-4xl
+                font-bold
+                mb-10
+                uppercase
+                tracking-wider
+                underline-offset-8
+                decoration-[2px]
+                underline
+                decoration-emerald-500
+              "
+            >
+              {LINKS[1]}
+            </h2>
           </header>
+          <div className="grid grid-cols-2 gap-10">
+            {POSTS.slice(0, 8).map(({ title, content, image_url }) => (
+              <BlogCard
+                key={`blog-card-${useId()}`}
+                title={title}
+                content={content}
+                imgUrl={image_url}
+              />
+            ))}
+          </div>
         </section>
       </main>
     </div>
