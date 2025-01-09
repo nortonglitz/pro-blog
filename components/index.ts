@@ -1,6 +1,5 @@
 export { IconSocialLink } from "./IconSocialLink"
 export { Button } from "./Button"
 export { TextLoop } from "./TextLoop"
-export { BlogCard } from "./BlogCard"
 export { InputText } from "./InputText"
 export { TextArea } from "./TextArea"

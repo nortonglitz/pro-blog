@@ -1,5 +1,6 @@
-import { BlogCard, TextLoop, InputText, TextArea, Button } from "@/components"
+import { TextLoop, InputText, TextArea, Button } from "@/components"
 import { Sidebar } from "./Sidebar"
+import { BlogCard } from "./BlogCard"
 import { BlogCardMore } from "./BlogCardMore"
 import { USER_CONTENT, LINKS, POSTS } from "@/content"
 import Image from "next/image"
