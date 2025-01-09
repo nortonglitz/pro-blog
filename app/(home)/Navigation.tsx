@@ -6,12 +6,9 @@ import { IconSocialLink } from "@/components"
 import { useState } from "react"
 import { SocialMedia } from "@/components/icons"
 import { LINKS } from "@/content"
-import { useScreenSize } from "@/hooks"
 import { MenuMobile } from "./MenuMobile"
 
-export const Sidebar = () => {
-  const { isMobile } = useScreenSize()
-
+export const Navigation = () => {
   const [activeLink, setActiveLink] = useState(LINKS[0])
   const linksId = LINKS.map(title => title.replace(" ", "-").toLocaleLowerCase())
 
