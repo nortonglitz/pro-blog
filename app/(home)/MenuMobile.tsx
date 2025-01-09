@@ -1,37 +1,78 @@
 "use client"
 
-import { USER_CONTENT } from "@/content"
-import Link from "next/link"
 import { IconSocialLink } from "@/components"
-import { useState } from "react"
 import { SocialMedia } from "@/components/icons"
-import { LINKS } from "@/content"
-import { useScreenSize } from "@/hooks"
-import { MenuMobile } from "./MenuMobile"
+import { USER_CONTENT, LINKS } from "@/content"
+import { IconMenu2, IconX } from "@tabler/icons-react"
+import Link from "next/link"
+import { useState } from "react"
 
-export const Sidebar = () => {
-  const { isMobile } = useScreenSize()
-
+export const MenuMobile = () => {
+  const [isOpen, setIsOpen] = useState(false)
   const [activeLink, setActiveLink] = useState(LINKS[0])
   const linksId = LINKS.map(title => title.replace(" ", "-").toLocaleLowerCase())
 
+  const handleLinkClick = (title: string) => {
+    setActiveLink(title)
+    setIsOpen(false)
+  }
+
   return (
     <>
-      <MenuMobile />
-      <aside
+      <header
         className="
-          hidden
-          md:flex
+          md:hidden
+          fixed
+          top-0
+          h-16
+          right-0
+          left-0
+          flex
+          justify-between
+          px-10
+          items-center
+          z-20
+          drop-shadow
+          bg-neutral-950
+        "
+      >
+        <Link href="/">
+          <span className="text-3xl font-jura font-bold text-emerald-500 select-none">
+            {USER_CONTENT.name.split(" ").map(name => name.charAt(0))}
+          </span>
+        </Link>
+        <button onClick={() => setIsOpen(true)}>
+          <IconMenu2
+            size="2rem"
+            stroke="1px"
+          />
+        </button>
+      </header>
+      <div
+        className={`
+          fixed
+          z-30
+          top-0
+          right-0
+          left-0
+          bottom-0
+          ${isOpen ? "flex" : "hidden"}
+          md:hidden
           border-black
-          h-screen
           py-10
           flex-col
           justify-between
-          md:relative
-          bg-stone-950
-        "
+          bg-stone-950/90
+          backdrop-blur
+        `}
       >
-        <header className="px-4 mx-auto">
+        <button
+          className="absolute top-0 right-0 mr-5 mt-5"
+          onClick={() => setIsOpen(false)}
+        >
+          <IconX size="2rem" />
+        </button>
+        <header className="px-4 mx-auto relative">
           {USER_CONTENT.name.split(" ").map((name, i) => (
             <h3
               key={`name-title-${i}`}
@@ -69,7 +110,7 @@ export const Sidebar = () => {
               >
                 <Link
                   className="transition w-full h-full block py-3 pointer-events-auto hover:scale-110"
-                  onClick={() => setActiveLink(title)}
+                  onClick={() => handleLinkClick(title)}
                   href={`#${linksId[i]}`}
                   key={`side-nav-${i}`}
                 >
@@ -90,7 +131,7 @@ export const Sidebar = () => {
             )
           })}
         </footer>
-      </aside>
+      </div>
     </>
   )
 }
