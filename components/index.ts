@@ -1,4 +1,3 @@
-export { Sidebar } from "./Sidebar"
 export { IconSocialLink } from "./IconSocialLink"
 export { Button } from "./Button"
 export { TextLoop } from "./TextLoop"
