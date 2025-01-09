@@ -1,5 +1,6 @@
-import { BlogCard, TextLoop, BlogCardLink, InputText, TextArea, Button } from "@/components"
+import { BlogCard, TextLoop, InputText, TextArea, Button } from "@/components"
 import { Sidebar } from "./Sidebar"
+import { BlogCardMore } from "./BlogCardMore"
 import { USER_CONTENT, LINKS, POSTS } from "@/content"
 import Image from "next/image"
 import Link from "next/link"
@@ -110,7 +111,9 @@ export default function Home() {
                 imgUrl={image_url}
               />
             ))}
-            <BlogCardLink href="#" />
+            <Link href="#">
+              <BlogCardMore />
+            </Link>
           </div>
         </section>
         <section
