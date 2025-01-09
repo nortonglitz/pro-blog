@@ -40,9 +40,8 @@ export default function Home() {
           overflow-auto
 
           [&>section]:pt-20
-          [&>section]:md:pr-10
-          [&>section]:md:pl-5
-          [&>section]:px-1
+          [&>section]:md:px-10
+          [&>section]:px-2
           [&>section:last-child]:pb-20
         "
       >
