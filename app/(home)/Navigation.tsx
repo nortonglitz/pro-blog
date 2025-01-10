@@ -67,7 +67,7 @@ export const Navigation = () => {
                 <Link
                   className="transition w-full h-full block py-3 pointer-events-auto hover:scale-110"
                   onClick={() => setActiveLink(title)}
-                  href={`#${linksId[i]}`}
+                  href={`/#${linksId[i]}`}
                   key={`side-nav-${i}`}
                 >
                   {title}

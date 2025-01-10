@@ -101,12 +101,16 @@ export default function Home() {
         </header>
         <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 gap-10">
           {POSTS.slice(0, 7).map(({ title, content, image_url }) => (
-            <BlogCard
+            <Link
+              href="/blog/posts/2"
               key={`blog-card-${useId()}`}
-              title={title}
-              content={content}
-              imgUrl={image_url}
-            />
+            >
+              <BlogCard
+                title={title}
+                content={content}
+                imgUrl={image_url}
+              />
+            </Link>
           ))}
           <Link href="/blog">
             <BlogCardMore />
