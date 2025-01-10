@@ -4,9 +4,9 @@ import { POSTS } from "@/content"
 
 export default function Post() {
   return (
-    <main className="flex flex-col h-screen overflow-y-auto px-5">
-      <header className="border-b-2 border-b-emerald-500">
-        <figure className="w-full relative h-96">
+    <main className="flex flex-col h-screen overflow-y-auto px-2 md:px-5">
+      <header>
+        <figure className="relative h-96 m-auto border-b-emerald-500 max-w-4xl border-b-2">
           <Image
             className="object-cover"
             src={POSTS[0].image_url}
