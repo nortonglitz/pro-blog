@@ -4,21 +4,22 @@ type BlogCardProps = {
   content: string
   imgUrl: string
   title: string
+  className?: string
 }
 
-export const BlogCard = ({ content, imgUrl, title }: BlogCardProps) => (
+export const BlogCard = ({ content, imgUrl, title, className = "h-96" }: BlogCardProps) => (
   <article
-    className="
-      h-full
+    className={`
       bg-neutral-900
       cursor-pointer
       hover:outline
       hover:outline-4
       hover:outline-emerald-500
       [&:hover_img]:scale-110
-    "
+      ${className}
+    `}
   >
-    <figure className="h-96 relative overflow-hidden">
+    <figure className="relative overflow-hidden h-full">
       <Image
         className="object-cover transition duration-300"
         src={imgUrl}
