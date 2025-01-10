@@ -111,7 +111,7 @@ export const MenuMobile = () => {
                 <Link
                   className="transition w-full h-full block py-3 pointer-events-auto hover:scale-110"
                   onClick={() => handleLinkClick(title)}
-                  href={`#${linksId[i]}`}
+                  href={`/#${linksId[i]}`}
                   key={`side-nav-${i}`}
                 >
                   {title}
