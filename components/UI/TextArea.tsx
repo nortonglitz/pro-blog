@@ -1,16 +1,6 @@
-type TextAreaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
-  onEnter?: () => void
-}
+type TextAreaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>
 
-export const TextArea = ({ onEnter, onKeyDown: onKeyDownExternal, ...props }: TextAreaProps) => {
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && onEnter) {
-      e.preventDefault()
-      onEnter()
-    }
-    onKeyDownExternal?.(e)
-  }
-
+export const TextArea = ({ ...props }: TextAreaProps) => {
   return (
     <textarea
       className="
@@ -22,7 +12,6 @@ export const TextArea = ({ onEnter, onKeyDown: onKeyDownExternal, ...props }: Te
         w-full
         resize-none
       "
-      onKeyDown={handleKeyDown}
       {...props}
     />
   )
