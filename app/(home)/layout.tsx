@@ -6,11 +6,9 @@ export default function HomeLayout({
   children: React.ReactNode
 }>) {
   return (
-    <>
-      <div className="md:grid md:grid-cols-[14rem_1fr]">
-        <Navigation />
-        {children}
-      </div>
-    </>
+    <div className="md:grid md:grid-cols-[14rem_1fr]">
+      <Navigation />
+      {children}
+    </div>
   )
 }
