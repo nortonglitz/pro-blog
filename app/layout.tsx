@@ -3,6 +3,12 @@ import type { Metadata } from "next"
 import { USER_CONTENT } from "@/content"
 import { Jura } from "next/font/google"
 import { Onest } from "next/font/google"
+import { Azeret_Mono } from "next/font/google"
+
+const azeretMono = Azeret_Mono({
+  subsets: ["latin"],
+  variable: "--font-azeret-mono"
+})
 
 const onestFont = Onest({
   subsets: ["latin"],
@@ -33,6 +39,7 @@ export default function RootLayout({
           ${onestFont.className}
           ${juraFont.variable}
           ${onestFont.variable}
+          ${azeretMono.variable}
         `}
       >
         {children}
