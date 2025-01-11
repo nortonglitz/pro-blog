@@ -13,7 +13,8 @@ export default {
         foreground: "var(--foreground)"
       },
       fontFamily: {
-        jura: ["var(--font-jura)", "sans-serif"]
+        jura: ["var(--font-jura)", "sans-serif"],
+        "azeret-mono": ["var(--font-azeret-mono)", "mono"]
       }
     }
   },
