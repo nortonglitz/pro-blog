@@ -12,7 +12,7 @@ export default function Login() {
               stroke={1}
             />
             <figcaption className="text-center">
-              <h1 className="text-3xl font-semibold tracking-wider">Dashboard</h1>
+              <h1 className="text-3xl font-semibold tracking-wider font-azeret-mono">Dashboard</h1>
               <p className="text-neutral-500">Here you can edit all your website</p>
             </figcaption>
           </figure>
