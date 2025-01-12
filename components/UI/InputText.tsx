@@ -1,5 +1,5 @@
 type InputTextProps = React.InputHTMLAttributes<HTMLInputElement> & {
-  onEnter?: () => void
+  onEnter?: (e: React.KeyboardEvent<HTMLInputElement>) => void
 }
 
 export const InputText = ({
@@ -11,8 +11,7 @@ export const InputText = ({
 }: InputTextProps) => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && onEnter) {
-      e.preventDefault()
-      onEnter()
+      onEnter(e)
     }
     onKeyDownExternal?.(e)
   }
