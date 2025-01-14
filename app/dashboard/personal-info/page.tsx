@@ -19,7 +19,7 @@ const HELPERS = {
 
 const HeaderFieldset = ({ title, text }: { title: string; text: string }) => (
   <header className="flex gap-2 items-center mb-1">
-    <h2>{title}</h2>
+    <h2 className="text-lg">{title}</h2>
     <Popover text={text}>
       <IconHelp
         className="cursor-help text-neutral-600"
@@ -63,7 +63,7 @@ export default function PersonalInfo() {
         <h1 className="text-xl font-semibold tracking-wide uppercase">Personal Information</h1>
       </header>
       <form
-        className="flex flex-col max-w-prose gap-10 w-full [&_h2]:text-lg"
+        className="flex flex-col max-w-prose gap-10 w-full"
         onSubmit={handleSubmit(data => console.log(data))}
       >
         {/* Name */}
