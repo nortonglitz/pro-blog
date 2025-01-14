@@ -44,6 +44,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 export const Button = ({
   children,
   loading = false,
+  type = "button",
   disabled,
   size = "medium",
   variant = "standard",
@@ -53,6 +54,7 @@ export const Button = ({
 }: ButtonProps) => {
   return (
     <button
+      type={type}
       aria-busy={loading ? "true" : undefined}
       aria-disabled={disabled || loading ? "true" : undefined}
       className={clsx(sizeStyles[size], styles[variant][color], disabledStyles, className)}
