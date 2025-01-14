@@ -1,6 +1,7 @@
 "use client"
 
-import { Button, TextArea, Chip, Popover, InputText } from "@/components/UI"
+import { Popover } from "@/components/UI/client"
+import { Button, TextArea, Chip, InputText } from "@/components/UI"
 import { IconPlus, IconHelp, IconX } from "@tabler/icons-react"
 import { getSiteNameFromURL } from "@/libs/url"
 import { useZodForm } from "@/hooks/useZodForm"
