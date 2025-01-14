@@ -1,0 +1,88 @@
+/* Contêiner Principal */
+.ql-container {
+  border: 1px solid #404040 !important; /* Borda verde */
+  border-top: none !important;
+  background-color: #0a0a0a; /* Fundo claro */
+}
+
+/* Área de Edição */
+.ql-editor {
+  padding: 1rem; /* Espaçamento interno */
+  font-size: 1rem; /* Tamanho do texto */
+  line-height: 1.6; /* Altura da linha */
+  background-color: #171717; /* Fundo da área de edição */
+}
+
+/* Barra de Ferramentas */
+.ql-toolbar {
+  background-color: #171717; /* Fundo verde */
+  border: 1px solid #404040 !important; /* Borda igual ao contêiner */
+  border-bottom: none; /* Remove a borda inferior */
+}
+
+/* Alterar a cor padrão dos ícones */
+.ql-toolbar button {
+  filter: brightness(0) saturate(100%) invert(71%) sepia(12%) saturate(10%) hue-rotate(350deg)
+    brightness(90%) contrast(91%);
+}
+
+/* Alterar a cor ao passar o mouse */
+.ql-toolbar button:hover {
+  filter: brightness(0) saturate(100%) invert(99%) sepia(2%) saturate(229%) hue-rotate(237deg)
+    brightness(118%) contrast(100%);
+}
+
+/* Alterar a cor para botões ativos */
+.ql-toolbar button.ql-active {
+  filter: brightness(0) saturate(100%) invert(57%) sepia(46%) saturate(2845%) hue-rotate(148deg)
+    brightness(95%) contrast(95%);
+}
+
+/* Cor do botão de seleção de heading */
+.ql-picker.ql-header .ql-picker-label {
+  color: #a3a3a3; /* Cor do texto */
+}
+
+/* Cor do texto ao passar o mouse */
+.ql-picker.ql-header .ql-picker-label:hover svg {
+  filter: brightness(0) saturate(100%) invert(99%) sepia(2%) saturate(229%) hue-rotate(237deg)
+    brightness(118%) contrast(100%);
+}
+
+/* Cor do texto ao passar o mouse */
+.ql-picker.ql-header .ql-picker-label:hover {
+  color: white;
+}
+
+.ql-picker.ql-header .ql-picker-item:hover {
+  color: white; /* Cor ao passar o mouse */
+}
+
+.ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-label {
+  border-color: transparent !important;
+}
+
+#ql-picker-options-0 {
+  padding: 0;
+  border: 1px #404040 solid;
+}
+
+.ql-picker-item {
+  padding: 0px 1rem 0px 1rem;
+  background-color: #262626;
+  color: #737373;
+}
+
+/* Botão ativo na toolbar */
+.ql-picker-label.ql-active {
+  color: #06b6d4 !important; /* Texto branco */
+}
+
+.ql-picker-label.ql-active:hover {
+  color: white !important; /* Texto branco */
+}
+
+.ql-picker-label.ql-active svg {
+  filter: brightness(0) saturate(100%) invert(57%) sepia(46%) saturate(2845%) hue-rotate(148deg)
+    brightness(95%) contrast(95%);
+}
