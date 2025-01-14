@@ -5,6 +5,7 @@ import clsx from "clsx"
 import { usePathname } from "next/navigation"
 import { useId } from "react"
 import { IconId, IconSettings, IconMessage, IconBook, IconDashboard } from "@tabler/icons-react"
+import Link from "next/link"
 
 const LINKS = [
   { label: "Personal info", href: "/dashboard/personal-info", icon: IconId },
@@ -28,24 +29,19 @@ export const Navigation = () => {
           <span className="w-fit">Dashboard</span>
         </h1>
       </header>
-      <ul
-        className="
-          text-lg
-
-          [&_li]:py-4
-          [&_li]:pl-5
-        "
-      >
+      <ul>
         {LINKS.map(({ href, label, icon: Icon }) => (
-          <li
-            key={`${label}-${useId()}`}
-            className={clsx(
-              href === pathname ? "bg-neutral-950" : "hover:bg-neutral-800",
-              "cursor-pointer flex items-center gap-5"
-            )}
-          >
-            <Icon stroke={1.5} />
-            {label}
+          <li key={`${label}-${useId()}`}>
+            <Link
+              href={href}
+              className={clsx(
+                href === pathname ? "bg-neutral-950" : "hover:bg-neutral-800",
+                "cursor-pointer flex items-center gap-5 h-full pl-5 py-4 text-lg"
+              )}
+            >
+              <Icon stroke={1.5} />
+              {label}
+            </Link>
           </li>
         ))}
       </ul>
