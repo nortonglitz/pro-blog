@@ -21,7 +21,7 @@ type InputLabelProps = {
 const InputLabel = ({ children, htmlFor, title, tip }: InputLabelProps) => {
   return (
     <label htmlFor={htmlFor}>
-      <div className="flex gap-2 mb-0.5">
+      <div className="flex gap-2 mb-0.5 items-center">
         <h3>{title}</h3>
         {tip && (
           <Popover text={tip}>
