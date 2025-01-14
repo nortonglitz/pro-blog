@@ -57,7 +57,13 @@ export const Button = ({
       type={type}
       aria-busy={loading ? "true" : undefined}
       aria-disabled={disabled || loading ? "true" : undefined}
-      className={clsx(sizeStyles[size], styles[variant][color], disabledStyles, className)}
+      className={clsx(
+        baseStyles,
+        sizeStyles[size],
+        styles[variant][color],
+        disabledStyles,
+        className
+      )}
       disabled={disabled || loading}
       {...props}
     >
