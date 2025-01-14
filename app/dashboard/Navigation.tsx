@@ -35,7 +35,7 @@ export const Navigation = () => {
             <Link
               href={href}
               className={clsx(
-                href === pathname ? "bg-neutral-950" : "hover:bg-neutral-800",
+                pathname.includes(href) ? "bg-neutral-950" : "hover:bg-neutral-800",
                 "cursor-pointer flex items-center gap-5 h-full pl-5 py-4 text-lg"
               )}
             >
