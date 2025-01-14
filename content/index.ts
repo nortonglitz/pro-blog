@@ -22,13 +22,9 @@ export const USER_CONTENT: UserContent = {
   ]
 }
 
-export type Post = {
-  title: string
-  content: string
-  image_url: string
-}
+export type Post = (typeof POSTS)[0]
 
-export const POSTS: Post[] = [
+export const POSTS = [
   {
     title: "Top Technology Trends for 2025",
     content:
