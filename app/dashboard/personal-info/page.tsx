@@ -58,11 +58,11 @@ export default function PersonalInfo() {
 
   return (
     <main className="h-screen overflow-y-auto px-10 py-10 flex flex-col items-center">
-      <header className="border-b border-neutral-800 pb-2 w-full">
+      <header className="border-b border-neutral-800 pb-2 w-full mb-10">
         <h1 className="text-xl font-semibold tracking-wide uppercase">Personal Information</h1>
       </header>
       <form
-        className="flex flex-col mt-10 max-w-prose gap-10 w-full [&_h2]:text-lg"
+        className="flex flex-col max-w-prose gap-10 w-full [&_h2]:text-lg"
         onSubmit={handleSubmit(data => console.log(data))}
       >
         {/* Name */}
