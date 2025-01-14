@@ -1,3 +1,5 @@
+"use client"
+
 import { Button, InputText } from "@/components/UI"
 import { IconDashboard } from "@tabler/icons-react"
 
