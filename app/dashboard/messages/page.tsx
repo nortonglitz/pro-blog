@@ -35,7 +35,7 @@ export default function Messages() {
                 <td className="pl-4">
                   {read ? <IconMailOpened stroke={1.5} /> : <IconMail stroke={1} />}
                 </td>
-                <td className="truncate text-ellipsis max-w-full">{subject}</td>
+                <td className="truncate text-ellipsis max-w-full font-semibold">{subject}</td>
                 <td>{from}</td>
                 <td className="pr-4">{formatDistanceToNow(receivedOn) + " ago"}</td>
               </tr>
