@@ -10,8 +10,8 @@ import Link from "next/link"
 const LINKS = [
   { label: "Personal info", href: "/dashboard/personal-info", icon: IconId },
   { label: "Posts", href: "/dashboard/posts", icon: IconBook },
-  { label: "Options", href: "/dashboard/options", icon: IconSettings },
-  { label: "Messages", href: "/dashboard/messages", icon: IconMessage }
+  { label: "Messages", href: "/dashboard/messages", icon: IconMessage },
+  { label: "Options", href: "/dashboard/options", icon: IconSettings }
 ]
 
 export const Navigation = () => {
