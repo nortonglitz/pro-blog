@@ -12,7 +12,6 @@ type MessageModalProps = {
 export const MessageModal = ({ message, isOpen, onClose }: MessageModalProps) => {
   if (!isOpen || !message) return null
 
-  console.log(message)
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-30 bg-black/60 backdrop-blur-sm">
       <article className="bg-neutral-900 p-4 flex flex-col border-neutral-800 border">
@@ -21,7 +20,7 @@ export const MessageModal = ({ message, isOpen, onClose }: MessageModalProps) =>
           <Button
             onClick={() => onClose?.()}
             variant="ghost"
-            className="w-fit self-end"
+            className="w-fit self-start"
           >
             <IconX />
           </Button>
