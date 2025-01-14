@@ -26,7 +26,7 @@ export const MessageModal = ({ message, isOpen, onClose }: MessageModalProps) =>
             <IconX />
           </Button>
         </header>
-        <div className="flex justify-between items-baseline gap-10 mt-2 text-neutral-400">
+        <div className="flex justify-between items-baseline gap-10 mt-2 text-neutral-400 mb-4">
           <p>{message.from}</p>
           <p className="text-sm">{formatDistanceToNow(message.receivedOn) + " ago"}</p>
         </div>
