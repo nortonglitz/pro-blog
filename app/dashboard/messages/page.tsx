@@ -28,14 +28,16 @@ export default function Messages() {
                 key={`msg-${from}-${i}`}
                 className={clsx(
                   read ? "bg-neutral-900 text-neutral-400 outline-white" : "bg-neutral-800",
-                  "[&_td]:p-4 hover:outline cursor-pointer hover:scale-[101%]"
+                  "[&_td]:py-4 hover:outline cursor-pointer hover:scale-[101%] [&:not(:last-child)]:border-b [&:not(:last-child)]:border-neutral-700"
                 )}
                 onClick={() => setMessage({ from, content, read, receivedOn, subject })}
               >
-                <td>{read ? <IconMailOpened stroke={1} /> : <IconMail stroke={1} />}</td>
-                <td>{subject}</td>
+                <td className="pl-4">
+                  {read ? <IconMailOpened stroke={1.5} /> : <IconMail stroke={1} />}
+                </td>
+                <td className="truncate text-ellipsis max-w-full">{subject}</td>
                 <td>{from}</td>
-                <td>{formatDistanceToNow(receivedOn) + " ago"}</td>
+                <td className="pr-4">{formatDistanceToNow(receivedOn) + " ago"}</td>
               </tr>
             ))}
           </tbody>
