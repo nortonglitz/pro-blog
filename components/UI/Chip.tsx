@@ -34,6 +34,7 @@ export const Chip = ({
   const buttonClassName = "cursor-pointer hover:bg-neutral-800"
 
   return React.createElement(as === "button" ? "button" : "span", {
+    type: as === "button" ? "button" : undefined,
     className: `
           flex
           items-center
