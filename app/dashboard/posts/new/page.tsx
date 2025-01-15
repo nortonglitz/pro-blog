@@ -44,7 +44,7 @@ export default function NewPost() {
   const quillRef = useRef<any | null>(null)
 
   return (
-    <main className="h-screen overflow-y-auto px-10 py-10 flex flex-col items-center">
+    <main className="h-screen overflow-y-auto px-2 pt-20 md:pt-10 md:px-10 pb-10 flex flex-col items-center">
       <header className="border-b border-neutral-800 pb-2 w-full mb-10">
         <h1 className="text-xl font-semibold tracking-wide uppercase">New post</h1>
       </header>
@@ -75,7 +75,7 @@ export default function NewPost() {
           editorRef={quill => (quillRef.current = quill)}
         />
       </section>
-      <section className="flex w-full justify-between mt-5">
+      <section className="flex w-full justify-between mt-10">
         <Link href="/dashboard/posts">
           <Button>Dismiss</Button>
         </Link>
