@@ -52,10 +52,7 @@ export const MenuMobile = () => {
         className={`
           fixed
           z-30
-          top-0
-          right-0
-          left-0
-          bottom-0
+          inset-0
           ${isOpen ? "flex" : "hidden"}
           md:hidden
           border-black
