@@ -55,7 +55,6 @@ export const MenuMobile = () => {
           inset-0
           ${isOpen ? "flex" : "hidden"}
           md:hidden
-          border-black
           py-10
           flex-col
           justify-between
