@@ -3,6 +3,7 @@
 import { Button, InputText } from "@/components/UI"
 import { Popover, QuillEditor } from "@/components/UI/client"
 import { IconHelp } from "@tabler/icons-react"
+import Link from "next/link"
 import { useRef, useState } from "react"
 
 const TIPS = {
@@ -75,7 +76,9 @@ export default function NewPost() {
         />
       </section>
       <section className="flex w-full justify-between mt-5">
-        <Button>Dismiss</Button>
+        <Link href="/dashboard/posts">
+          <Button>Dismiss</Button>
+        </Link>
         <Button color="success">Save</Button>
       </section>
     </main>
