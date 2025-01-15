@@ -227,6 +227,7 @@ export default function PersonalInfo() {
               placeholder="Type about yourself here"
               {...register("about")}
               error={errors.about?.message}
+              charactersCount={watch("about").length}
             />
           </div>
         </fieldset>
