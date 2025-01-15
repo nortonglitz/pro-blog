@@ -48,13 +48,13 @@ export const PostCard = ({ post }: PostCardProps) => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
 
   return (
-    <article className="transition flex h-52 hover:bg-neutral-900 border border-neutral-800 group relative">
+    <article className="transition flex h-96 xl:h-48 hover:bg-neutral-900 border border-neutral-800 group relative flex-wrap xl:flex-nowrap">
       <DeleteModal
         isOpen={openDeleteModal}
         onClose={() => setOpenDeleteModal(false)}
         onDelete={() => {}}
       />
-      <figure className="relative h-full w-52 flex-shrink-0">
+      <figure className="relative w-full h-48 xl:w-52 flex-shrink-0">
         <Image
           className="object-cover"
           src={post.image_url}
@@ -66,7 +66,23 @@ export const PostCard = ({ post }: PostCardProps) => {
         <div>
           <header className="flex justify-between gap-5 mb-2">
             <h3 className="text-lg font-semibold line-clamp-1">{post.title}</h3>
-            <menu className="invisible group-hover:visible flex flex-nowrap gap-5">
+            <menu
+              className="
+                flex
+                flex-nowrap
+                gap-5
+                absolute
+                top-0
+                right-0
+                bg-black/90
+                p-2
+                
+                md:static
+                md:invisible
+                md:group-hover:visible
+                md:bg-transparent
+                md:p-0"
+            >
               <Button
                 variant="ghost"
                 color="error"
