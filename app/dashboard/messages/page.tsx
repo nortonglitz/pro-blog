@@ -27,7 +27,7 @@ export default function Messages() {
             className={clsx(
               read ? "bg-neutral-900 text-neutral-400 outline-white" : "bg-neutral-800",
               "flex gap-4 items-center py-4 px-2 md:px-4 flex-wrap relative",
-              "hover:outline hover:scale-[101%] cursor-pointer",
+              "hover:outline hover:scale-[101%] hover:z-10 cursor-pointer",
               "[&:not(:last-child)]:border-b [&:not(:last-child)]:border-neutral-700"
             )}
             onClick={() => setMessage({ from, content, read, receivedOn, subject })}
