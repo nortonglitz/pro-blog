@@ -1,8 +1,11 @@
 import clsx from "clsx"
+import { useId } from "react"
 
 type InputTextProps = React.InputHTMLAttributes<HTMLInputElement> & {
   onEnter?: (e: React.KeyboardEvent<HTMLInputElement>) => void
   error?: string
+  label?: React.ReactNode
+  labelClassName?: string
 }
 
 const baseStyles = "border px-2 py-1 w-full border bg-neutral-900"
@@ -13,6 +16,8 @@ export const InputText = ({
   type = "text",
   error,
   className,
+  labelClassName,
+  label,
   onEnter,
   onKeyDown: onKeyDownExternal,
   ...props
@@ -24,14 +29,26 @@ export const InputText = ({
     onKeyDownExternal?.(e)
   }
 
+  const id = useId()
+
   return (
-    <div className="w-full">
+    <div className={clsx("w-full", className)}>
+      {label && (
+        <label
+          htmlFor={`input-text-${id}`}
+          className={clsx("flex", labelClassName)}
+        >
+          {label}
+        </label>
+      )}
       <input
+        id={`input-text-${id}`}
         onKeyDown={handleKeyDown}
-        className={clsx(baseStyles, error ? errorStyles : standardStyles, className)}
+        className={clsx(baseStyles, error ? errorStyles : standardStyles)}
         type={type}
         {...props}
       />
+
       {error && <p className="text-sm mt-0.5 text-red-600">{error}</p>}
     </div>
   )
