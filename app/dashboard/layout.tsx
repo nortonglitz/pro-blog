@@ -1,6 +1,6 @@
 import { Navigation } from "./Navigation"
 
-export default function HomeLayout({
+export default function DashboardLayout({
   children
 }: Readonly<{
   children: React.ReactNode

@@ -19,12 +19,12 @@ export const Navigation = () => {
         className="
           hidden
           md:flex
+          md:relative
+          flex-col
           border-black
           h-screen
           py-10
-          flex-col
           justify-between
-          md:relative
           bg-stone-950
         "
       >
