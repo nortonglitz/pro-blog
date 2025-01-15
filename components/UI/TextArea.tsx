@@ -24,7 +24,7 @@ export const TextArea = ({
 }: TextAreaProps) => {
   const id = useId()
   return (
-    <div className={clsx("w-full", className)}>
+    <div className={clsx("w-full flex flex-col", className)}>
       {label && (
         <label
           htmlFor={`text-area-${id}`}
@@ -38,10 +38,14 @@ export const TextArea = ({
         className={clsx(baseStyles, error ? errorStyles : standardStyles, !resize && "resize-none")}
         {...props}
       />
-      {typeof charactersCount === "number" && (
-        <p className="text-right text-neutral-500 text-sm leading-none">{charactersCount}</p>
+      {(error || typeof charactersCount === "number") && (
+        <div className="flex text-sm justify-end gap-5 mt-1">
+          {error && <p className="text-red-600 flex-1">{error}</p>}
+          {typeof charactersCount === "number" && (
+            <p className="place-self-end text-neutral-500">{charactersCount}</p>
+          )}
+        </div>
       )}
-      {error && <p className="text-sm mt-0.5 text-red-600">{error}</p>}
     </div>
   )
 }
