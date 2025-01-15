@@ -63,21 +63,24 @@ export const MenuMobile = () => {
           </div>
         </header>
         <nav className="mt-10 w-full">
-          <ul>
+          <ul className="w-full">
             {LINKS.map(({ href, icon: Icon, label }, i) => (
               <li
                 key={`nav-item-${i}`}
                 onClick={() => setIsOpen(false)}
+                className="w-full"
               >
                 <Link
                   href={href}
                   className={clsx(
-                    "flex gap-2 items-center text-xl w-full py-5 pl-20",
+                    "flex justify-center text-xl w-full py-5 px-10",
                     pathname.includes(href) && "bg-neutral-950"
                   )}
                 >
-                  <Icon stroke={1} />
-                  <span>{label}</span>
+                  <div className="flex gap-2 items-center w-40">
+                    <Icon stroke={1} />
+                    <span>{label}</span>
+                  </div>
                 </Link>
               </li>
             ))}
