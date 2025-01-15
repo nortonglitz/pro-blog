@@ -74,12 +74,12 @@ export default function PersonalInfo() {
           />
           <div className="flex gap-5">
             <InputText
-              placeholder="First"
+              placeholder="John"
               {...register("firstName")}
               error={errors.firstName?.message}
             />
             <InputText
-              placeholder="Last"
+              placeholder="Schmitt"
               {...register("lastName")}
               error={errors.lastName?.message}
             />
@@ -95,7 +95,7 @@ export default function PersonalInfo() {
           <div className="flex w-full gap-2 items-start">
             <InputText
               name="newJob"
-              placeholder="Job"
+              placeholder="Photographer"
               value={newJob}
               onChange={e => setNewJob(e.target.value)}
               onEnter={e => {
@@ -151,7 +151,7 @@ export default function PersonalInfo() {
           <div className="flex w-full gap-2 items-start">
             <InputText
               name="newURL"
-              placeholder="URL"
+              placeholder="https://www.linkedin.com/in/username/"
               value={newURL}
               onChange={e => setNewURL(e.target.value)}
               onEnter={e => {
