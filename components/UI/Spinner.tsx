@@ -7,7 +7,7 @@ export const Spinner = () => {
           h-6
           border-2
           rounded-full
-          border-white/50
+          border-white/80
         "
       />
       <div
@@ -19,7 +19,7 @@ export const Spinner = () => {
           border-b-transparent
           border-l-transparent
           animate-spin
-          border-white
+          border-black/80
           top-0
           left-0
           right-0
