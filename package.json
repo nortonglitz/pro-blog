@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "seed:messages": "NODE_ENV=development tsx db/seeds/messages.ts",
+    "seed:posts": "NODE_ENV=development tsx db/seeds/posts.ts",
+    "seed:user-info": "NODE_ENV=development tsx db/seeds/user-info.ts",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -24,9 +27,11 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@faker-js/faker": "^9.4.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^16.4.7",
     "drizzle-kit": "^0.30.1",
     "eslint": "^9",
     "eslint-config-next": "15.1.3",
