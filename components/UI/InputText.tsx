@@ -9,6 +9,7 @@ type InputTextProps = React.InputHTMLAttributes<HTMLInputElement> & {
 }
 
 const baseStyles = "border px-2 py-1 w-full border bg-neutral-900"
+const disabledStyles = "disabled:opacity-50 disabled:cursor-not-allowed"
 const standardStyles = "border-neutral-700"
 const errorStyles = "border-red-600"
 
@@ -44,7 +45,7 @@ export const InputText = ({
       <input
         id={`input-text-${id}`}
         onKeyDown={handleKeyDown}
-        className={clsx(baseStyles, error ? errorStyles : standardStyles)}
+        className={clsx(baseStyles, disabledStyles, error ? errorStyles : standardStyles)}
         type={type}
         {...props}
       />
