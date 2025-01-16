@@ -1,6 +1,6 @@
 import "./setup" // Load env
 
-import db from "../"
+import db from "@/db"
 import { messagesTable } from "@/schemas/drizzle"
 import { faker } from "@faker-js/faker"
 
