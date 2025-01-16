@@ -9,7 +9,8 @@ type TextAreaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
   labelClassName?: string
 }
 
-const baseStyles = "border px-2 py-1 w-full bg-neutral-900 "
+const baseStyles = "border px-2 py-1 w-full bg-neutral-900"
+const disabledStyles = "disabled:cursor-not-allowed disabled:opacity-50"
 const standardStyles = "border-neutral-700"
 const errorStyles = "border-red-600"
 
@@ -35,7 +36,12 @@ export const TextArea = ({
       )}
       <textarea
         id={`text-area-${id}`}
-        className={clsx(baseStyles, error ? errorStyles : standardStyles, !resize && "resize-none")}
+        className={clsx(
+          baseStyles,
+          disabledStyles,
+          error ? errorStyles : standardStyles,
+          !resize && "resize-none"
+        )}
         {...props}
       />
       {(error || typeof charactersCount === "number") && (
