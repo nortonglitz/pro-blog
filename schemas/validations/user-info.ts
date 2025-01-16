@@ -1,8 +1,16 @@
 import { z } from "zod"
 
-export const personalInfoSchema = z.object({
-  firstName: z.string().trim().min(1, "First name is required"),
-  lastName: z.string().trim().min(1, "Last name is required"),
+export const userInfoSchema = z.object({
+  firstName: z
+    .string()
+    .trim()
+    .min(1, "First name is required")
+    .max(100, "First name must be less than 100 characters."),
+  lastName: z
+    .string()
+    .trim()
+    .min(1, "Last name is required")
+    .max(100, "Last name must be less than 100 characters."),
   jobs: z
     .array(z.string().trim().min(1, "Job is required"))
     .min(1, "At least one job is required")
@@ -17,4 +25,4 @@ export const personalInfoSchema = z.object({
   newURL: z.string().trim().url("Invalid URL").optional()
 })
 
-export type PersonalInfoSchema = z.infer<typeof personalInfoSchema>
+export type UserInfoSchema = z.infer<typeof userInfoSchema>
