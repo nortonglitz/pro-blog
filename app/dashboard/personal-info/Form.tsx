@@ -5,7 +5,7 @@ import { Button, TextArea, Chip, InputText } from "@/components/UI"
 import { IconPlus, IconHelp, IconX } from "@tabler/icons-react"
 import { getSiteNameFromURL } from "@/libs/url"
 import { useZodForm } from "@/hooks/useZodForm"
-import { personalInfoSchema } from "@/schemas/validations"
+import { userInfoSchema } from "@/schemas/validations"
 import { useState } from "react"
 import { UserInfo } from "@/db/types"
 
@@ -45,20 +45,20 @@ export const Form = ({ data }: FormProps) => {
     setValue,
     reset
   } = useZodForm({
-    schema: personalInfoSchema,
+    schema: userInfoSchema,
     options: {
       defaultValues: {
-        firstName: data?.first_name || "",
-        lastName: data?.last_name || "",
+        first_name: data?.first_name || "",
+        last_name: data?.last_name || "",
         jobs: data?.jobs || [],
-        socialMedias: data?.socials || {},
+        socials: data?.socials || {},
         about: data?.about || ""
       }
     }
   })
 
   const jobs = watch("jobs")
-  const socialMedias = watch("socialMedias")
+  const socialMedias = watch("socials")
 
   const [newJob, setNewJob] = useState("")
   const [newURL, setNewURL] = useState("")
@@ -77,13 +77,13 @@ export const Form = ({ data }: FormProps) => {
         <div className="flex gap-5 flex-wrap md:flex-nowrap">
           <InputText
             placeholder="John"
-            {...register("firstName")}
-            error={errors.firstName?.message}
+            {...register("first_name")}
+            error={errors.first_name?.message}
           />
           <InputText
             placeholder="Schmitt"
-            {...register("lastName")}
-            error={errors.lastName?.message}
+            {...register("last_name")}
+            error={errors.last_name?.message}
           />
         </div>
       </fieldset>
@@ -162,14 +162,14 @@ export const Form = ({ data }: FormProps) => {
               const name = getSiteNameFromURL(newURL)
               if (!name) return
               const newSocialMedias = { ...socialMedias, [name]: newURL }
-              if (validateField("socialMedias", newSocialMedias)) {
-                setValue("socialMedias", newSocialMedias)
+              if (validateField("socials", newSocialMedias)) {
+                setValue("socials", newSocialMedias)
                 setNewURL("")
               }
             }}
             error={
-              errors.socialMedias
-                ? Object.entries(errors.socialMedias)
+              errors.socials
+                ? Object.entries(errors.socials)
                     .map(([key, value]) => {
                       if (key === "message") {
                         return value
@@ -187,8 +187,8 @@ export const Form = ({ data }: FormProps) => {
               const name = getSiteNameFromURL(newURL)
               if (!name) return
               const newSocialMedias = { ...socialMedias, [name]: newURL }
-              if (validateField("socialMedias", newSocialMedias)) {
-                setValue("socialMedias", newSocialMedias)
+              if (validateField("socials", newSocialMedias)) {
+                setValue("socials", newSocialMedias)
                 setNewURL("")
               }
             }}
@@ -206,8 +206,8 @@ export const Form = ({ data }: FormProps) => {
               title={url}
               onClick={() => {
                 const { [name]: _, ...newSocialMedias } = socialMedias
-                if (validateField("socialMedias", newSocialMedias)) {
-                  setValue("socialMedias", newSocialMedias)
+                if (validateField("socials", newSocialMedias)) {
+                  setValue("socials", newSocialMedias)
                 }
               }}
             >
