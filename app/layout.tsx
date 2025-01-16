@@ -4,6 +4,7 @@ import { USER_CONTENT } from "@/content"
 import { Jura } from "next/font/google"
 import { Onest } from "next/font/google"
 import { Azeret_Mono } from "next/font/google"
+import { Toaster } from "react-hot-toast"
 
 const azeretMono = Azeret_Mono({
   subsets: ["latin"],
@@ -42,6 +43,16 @@ export default function RootLayout({
           ${azeretMono.variable}
         `}
       >
+        <Toaster
+          toastOptions={{
+            style: {
+              borderRadius: 0,
+              color: "#fff",
+              backgroundColor: "#0a0a0a",
+              border: "1px solid #404040"
+            }
+          }}
+        />
         {children}
       </body>
     </html>
