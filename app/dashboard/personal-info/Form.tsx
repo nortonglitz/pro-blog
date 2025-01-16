@@ -8,6 +8,8 @@ import { useZodForm } from "@/hooks/useZodForm"
 import { userInfoSchema } from "@/schemas/validations"
 import { useState } from "react"
 import { UserInfo } from "@/db/types"
+import { saveUserInfo } from "@/db/actions/user-info/saveUserInfo"
+import { toast } from "react-hot-toast"
 
 const HELPERS = {
   name: "This will be used to create your logo. Avoid using long names to prevent disrupting the layout.",
@@ -63,10 +65,27 @@ export const Form = ({ data }: FormProps) => {
   const [newJob, setNewJob] = useState("")
   const [newURL, setNewURL] = useState("")
 
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleSave = async (formData: any) => {
+    try {
+      setIsLoading(true)
+      await saveUserInfo(formData)
+      toast.success("Information updated")
+    } catch (err) {
+      if (process.env.NODE_ENV === "development") {
+        console.error("Error saving user info:", err)
+      }
+      toast.error("Something went wrong")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <form
       className="flex flex-col md:max-w-prose gap-10 w-full"
-      onSubmit={handleSubmit(data => console.log(data))}
+      onSubmit={handleSubmit(handleSave)}
     >
       {/* Name */}
       <fieldset>
@@ -79,11 +98,13 @@ export const Form = ({ data }: FormProps) => {
             placeholder="John"
             {...register("first_name")}
             error={errors.first_name?.message}
+            disabled={isLoading}
           />
           <InputText
             placeholder="Schmitt"
             {...register("last_name")}
             error={errors.last_name?.message}
+            disabled={isLoading}
           />
         </div>
       </fieldset>
@@ -96,6 +117,7 @@ export const Form = ({ data }: FormProps) => {
         />
         <div className="flex w-full gap-2 items-start">
           <InputText
+            disabled={isLoading}
             name="newJob"
             placeholder="Photographer"
             value={newJob}
@@ -111,6 +133,7 @@ export const Form = ({ data }: FormProps) => {
             error={errors.jobs?.message}
           />
           <Button
+            disabled={isLoading}
             className="w-fit h-8"
             onClick={() => {
               if (validateField("jobs", [...jobs, newJob])) {
@@ -126,6 +149,7 @@ export const Form = ({ data }: FormProps) => {
         <div className="flex gap-2 mt-2 flex-wrap">
           {jobs.map((job, i) => (
             <Chip
+              disabled={isLoading}
               key={`job-${i}`}
               as="button"
               rightIcon={IconX}
@@ -152,6 +176,7 @@ export const Form = ({ data }: FormProps) => {
         />
         <div className="flex w-full gap-2 items-start">
           <InputText
+            disabled={isLoading}
             name="newURL"
             placeholder="https://www.linkedin.com/in/username/"
             value={newURL}
@@ -181,6 +206,7 @@ export const Form = ({ data }: FormProps) => {
             }
           />
           <Button
+            disabled={isLoading}
             className="w-fit h-8"
             onClick={() => {
               if (!validateField("newURL", newURL)) return
@@ -199,6 +225,7 @@ export const Form = ({ data }: FormProps) => {
         <div className="flex gap-2 mt-2">
           {Object.entries(socialMedias).map(([name, url]) => (
             <Chip
+              disabled={isLoading}
               key={name}
               as="button"
               rightIcon={IconX}
@@ -225,6 +252,7 @@ export const Form = ({ data }: FormProps) => {
         />
         <div className="flex flex-col w-full gap-2">
           <TextArea
+            disabled={isLoading}
             rows={10}
             placeholder="Type about yourself here"
             {...register("about")}
@@ -236,6 +264,7 @@ export const Form = ({ data }: FormProps) => {
 
       {/* Submit */}
       <Button
+        loading={isLoading}
         type="submit"
         color="success"
         className="w-fit self-end"
