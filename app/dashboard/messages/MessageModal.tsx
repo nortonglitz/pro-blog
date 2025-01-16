@@ -1,5 +1,5 @@
 import { Button } from "@/components/UI"
-import { Message } from "@/content"
+import { Message } from "@/db/types"
 import { IconX } from "@tabler/icons-react"
 import { formatDistanceToNow } from "date-fns"
 
@@ -27,7 +27,7 @@ export const MessageModal = ({ message, isOpen, onClose }: MessageModalProps) =>
         </header>
         <div className="text-sm flex justify-between items-baseline gap-10 mt-2 text-neutral-400 mb-4">
           <p className="flex-1 text-sm">{message.from}</p>
-          <p className="text-xs sm:text-sm">{formatDistanceToNow(message.receivedOn) + " ago"}</p>
+          <p className="text-xs sm:text-sm">{formatDistanceToNow(message.created_at) + " ago"}</p>
         </div>
         <p className="mt-2 p-4 bg-neutral-800 text-justify max-w-prose">{message.content}</p>
       </article>
