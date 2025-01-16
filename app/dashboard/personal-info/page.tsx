@@ -16,7 +16,7 @@ export default function PersonalInfo() {
         setUserInfo(data)
       } catch (err) {
         if (process.env.NODE_ENV === "development") {
-          console.error("Error fetching user info:", err)
+          console.error("Error fetching user info")
         }
         setUserInfo(null)
       }
