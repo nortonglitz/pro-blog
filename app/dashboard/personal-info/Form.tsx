@@ -8,7 +8,7 @@ import { useZodForm } from "@/hooks/useZodForm"
 import { userInfoSchema } from "@/schemas/validations"
 import { useState } from "react"
 import { UserInfo } from "@/db/types"
-import { saveUserInfo } from "@/db/actions/user-info/saveUserInfo"
+import { saveUserInfo } from "@/db/actions/user-info"
 import { toast } from "react-hot-toast"
 
 const HELPERS = {
