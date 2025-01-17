@@ -4,10 +4,11 @@ import { Button } from "@/components/UI"
 import { IconTrash, IconEdit } from "@tabler/icons-react"
 import { useQuillPlainText } from "@/hooks"
 import clsx from "clsx"
-import Image from "next/image"
 import { useState } from "react"
 import { Post } from "@/db/types"
 import { format } from "date-fns"
+import { deletePost } from "@/db/actions/posts"
+import { usePosts } from "@/contexts/PostsPageContext"
 
 type DeleteModalProps = {
   isOpen: boolean
@@ -48,15 +49,21 @@ export const PostCard = ({ data }: PostCardProps) => {
   if (!data) return null
 
   const text = useQuillPlainText(data.content)
+  const { setPosts } = usePosts()
 
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
+
+  const handleDeletePost = (id: number) => {
+    deletePost(id)
+    setPosts(posts => posts?.filter(post => post.id !== id))
+  }
 
   return (
     <article className="transition flex h-96 xl:h-48 hover:bg-neutral-900 border border-neutral-800 group relative flex-wrap xl:flex-nowrap">
       <DeleteModal
         isOpen={openDeleteModal}
         onClose={() => setOpenDeleteModal(false)}
-        onDelete={() => {}}
+        onDelete={() => handleDeletePost(data.id)}
       />
       <figure className="relative w-full h-48 xl:w-52 flex-shrink-0">
         <img
