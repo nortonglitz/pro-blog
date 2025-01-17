@@ -10,12 +10,10 @@ if (process.env.NODE_ENV !== "development") {
 }
 
 const generateContent = (paragraphs: number) => {
-  const content = {
-    ops: Array.from({ length: paragraphs }).flatMap(() => [
-      { insert: faker.lorem.paragraph() },
-      { insert: "\n" }
-    ])
-  }
+  const content = Array.from({ length: paragraphs }).flatMap(() => [
+    { insert: faker.lorem.paragraph() },
+    { insert: "\n" }
+  ])
 
   return content
 }

@@ -1,11 +1,11 @@
 import { useMemo } from "react"
-import { QuillDelta } from "@/types"
+import { QuillOps } from "@/types"
 
-export const useQuillPlainText = (delta: QuillDelta): string => {
+export const useQuillPlainText = (ops: QuillOps): string => {
   return useMemo(() => {
-    if (!delta || !delta.ops) return ""
+    if (!ops) return ""
 
-    return delta.ops
+    return ops
       .map((op: any) => {
         // Verifica se o `insert` é texto e ignora objetos ou conteúdos especiais
         if (typeof op.insert === "string") {
@@ -14,5 +14,5 @@ export const useQuillPlainText = (delta: QuillDelta): string => {
         return "" // Ignora conteúdos que não são texto
       })
       .join("")
-  }, [delta])
+  }, [ops])
 }
