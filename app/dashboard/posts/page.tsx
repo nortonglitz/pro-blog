@@ -1,10 +1,33 @@
+"use client"
+
 import { Button } from "@/components/UI"
-import { PostCard } from "./PostCard"
-import { POSTS } from "@/content"
 import { IconPlus } from "@tabler/icons-react"
 import Link from "next/link"
+import { useEffect } from "react"
+import { getPosts } from "@/db/actions/posts"
+import { PostListSkeleton } from "./PostListSkeleton"
+import { PostsList } from "./PostsList"
+import { usePosts } from "@/contexts/PostsPageContext"
 
 export default function Posts() {
+  const { posts, setPosts } = usePosts()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getPosts()
+        setPosts(data)
+      } catch (err) {
+        if (process.env.NODE_ENV === "development") {
+          console.error("Error fetching posts")
+        }
+        setPosts(null)
+      }
+    }
+
+    fetchData()
+  }, [])
+
   return (
     <main className="h-screen overflow-y-auto px-2 pt-20 md:pt-10 md:px-10 pb-10 flex flex-col items-center">
       <header className="border-b border-neutral-800 pb-2 w-full mb-10">
@@ -21,14 +44,7 @@ export default function Posts() {
           </Button>
         </Link>
       </section>
-      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 w-full gap-5">
-        {POSTS.map(post => (
-          <PostCard
-            post={post}
-            key={`card-${post.title}`}
-          />
-        ))}
-      </section>
+      {typeof posts === "undefined" ? <PostListSkeleton /> : <PostsList data={posts} />}
     </main>
   )
 }
