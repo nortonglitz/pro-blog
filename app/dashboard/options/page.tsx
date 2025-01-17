@@ -2,7 +2,7 @@
 
 import { Button, InputText, TextArea } from "@/components/UI"
 import { Popover } from "@/components/UI/client"
-import { useZodForm } from "@/hooks/useZodForm"
+import { useZodForm } from "@/hooks"
 import { IconHelp } from "@tabler/icons-react"
 import { siteOptionsSchema } from "@/schemas/validations"
 
