@@ -1,11 +1,13 @@
 "use client"
 
 import { Button } from "@/components/UI"
-import { Post } from "@/content"
 import { IconTrash, IconEdit } from "@tabler/icons-react"
+import { useQuillPlainText } from "@/hooks"
 import clsx from "clsx"
 import Image from "next/image"
 import { useState } from "react"
+import { Post } from "@/db/types"
+import { format } from "date-fns"
 
 type DeleteModalProps = {
   isOpen: boolean
@@ -39,11 +41,13 @@ const DeleteModal = ({ isOpen, onClose, onDelete }: DeleteModalProps) => (
 )
 
 type PostCardProps = {
-  post: Post
+  data: Post
 }
 
-export const PostCard = ({ post }: PostCardProps) => {
-  if (!post) return null
+export const PostCard = ({ data }: PostCardProps) => {
+  if (!data) return null
+
+  const text = useQuillPlainText(data.content)
 
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
 
@@ -55,17 +59,17 @@ export const PostCard = ({ post }: PostCardProps) => {
         onDelete={() => {}}
       />
       <figure className="relative w-full h-48 xl:w-52 flex-shrink-0">
-        <Image
-          className="object-cover"
-          src={post.image_url}
-          alt={`${post.title}`}
-          fill
+        <img
+          loading="lazy"
+          className="object-cover w-full h-full"
+          src={data.image_url}
+          alt={`${data.title}`}
         />
       </figure>
       <section className="px-5 py-2 flex flex-col justify-between w-full">
         <div>
           <header className="flex justify-between gap-5 mb-2">
-            <h3 className="text-lg font-semibold line-clamp-1">{post.title}</h3>
+            <h3 className="text-lg font-semibold line-clamp-1">{data.title}</h3>
             <menu
               className="
                 flex
@@ -98,9 +102,11 @@ export const PostCard = ({ post }: PostCardProps) => {
               </Button>
             </menu>
           </header>
-          <p className="line-clamp-4 text-justify text-neutral-500">{post.content}</p>
+          <p className="line-clamp-4 text-justify text-neutral-500">{text}</p>
         </div>
-        <footer className="self-end text-sm text-neutral-500">01-02-2024</footer>
+        <footer className="self-end text-sm text-neutral-500">
+          {format(data.created_at, "MM-dd-yyyy")}
+        </footer>
       </section>
     </article>
   )
