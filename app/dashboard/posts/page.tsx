@@ -4,28 +4,15 @@ import { Button } from "@/components/UI"
 import { IconPlus } from "@tabler/icons-react"
 import Link from "next/link"
 import { useEffect } from "react"
-import { getPosts } from "@/db/actions/posts"
 import { PostListSkeleton } from "./PostListSkeleton"
 import { PostsList } from "./PostsList"
 import { usePosts } from "@/contexts/PostsPageContext"
 
 export default function Posts() {
-  const { posts, setPosts } = usePosts()
+  const { posts, fetchPosts } = usePosts()
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getPosts()
-        setPosts(data)
-      } catch (err) {
-        if (process.env.NODE_ENV === "development") {
-          console.error("Error fetching posts")
-        }
-        setPosts(null)
-      }
-    }
-
-    fetchData()
+    fetchPosts()
   }, [])
 
   return (
