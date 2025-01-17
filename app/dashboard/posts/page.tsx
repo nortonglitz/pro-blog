@@ -3,17 +3,12 @@
 import { Button } from "@/components/UI"
 import { IconPlus } from "@tabler/icons-react"
 import Link from "next/link"
-import { useEffect } from "react"
 import { PostListSkeleton } from "./PostListSkeleton"
 import { PostsList } from "./PostsList"
 import { usePosts } from "@/contexts/PostsPageContext"
 
 export default function Posts() {
-  const { posts, fetchPosts } = usePosts()
-
-  useEffect(() => {
-    fetchPosts()
-  }, [])
+  const { posts } = usePosts()
 
   return (
     <main className="h-screen overflow-y-auto px-2 pt-20 md:pt-10 md:px-10 pb-10 flex flex-col items-center">

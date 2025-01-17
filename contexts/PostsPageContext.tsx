@@ -1,6 +1,6 @@
 "use client"
 
-import React, { createContext, useCallback, useContext, useState } from "react"
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react"
 import { Post } from "@/db/types"
 import { getPosts } from "@/db/actions/posts"
 
@@ -8,7 +8,6 @@ import { getPosts } from "@/db/actions/posts"
 interface PostsPageContextValue {
   posts: Post[] | null | undefined
   setPosts: React.Dispatch<React.SetStateAction<Post[] | null | undefined>>
-  fetchPosts: () => Promise<void>
 }
 
 // Cria o contexto com um valor inicial vazio
@@ -27,21 +26,31 @@ export const usePosts = (): PostsPageContextValue => {
 export const PostsPageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [posts, setPosts] = useState<Post[] | null | undefined>(undefined)
 
-  const fetchPosts = useCallback(async () => {
-    try {
-      const data = await getPosts()
-      setPosts(data)
-    } catch (err) {
-      if (process.env.NODE_ENV === "development") {
-        console.error("Error fetching posts:", err)
+  // Fetch dos posts ao montar o provider
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const data = await getPosts()
+        setPosts(data)
+      } catch (err) {
+        if (process.env.NODE_ENV === "development") {
+          console.error("Error fetching posts:", err)
+        }
+        setPosts(null)
       }
-      setPosts(null)
     }
+
+    fetchPosts()
   }, [])
 
-  return (
-    <PostsPageContext.Provider value={{ posts, setPosts, fetchPosts }}>
-      {children}
-    </PostsPageContext.Provider>
+  // Memoriza o valor do contexto
+  const value = useMemo(
+    () => ({
+      posts,
+      setPosts
+    }),
+    [posts, setPosts] // Atualiza o valor apenas quando posts ou setPosts mudarem
   )
+
+  return <PostsPageContext.Provider value={value}>{children}</PostsPageContext.Provider>
 }
