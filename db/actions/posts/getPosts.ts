@@ -6,13 +6,9 @@ import { desc } from "drizzle-orm"
 
 export const getPosts = async () => {
   try {
-    const messages = await db
-      .select()
-      .from(postsTable)
-      .orderBy(desc(postsTable.created_at))
-      .limit(20)
+    const posts = await db.select().from(postsTable).orderBy(desc(postsTable.created_at)).limit(20)
 
-    return messages || null
+    return posts || null
   } catch (err) {
     console.error("Error fetching posts:", err)
     throw new Error("Failed to fetch posts")
