@@ -10,9 +10,10 @@ interface QuillEditorProps {
   onChange: (content: string) => void
   editorRef?: (quill: any) => void // Passa a instância do editor para o pai
   className?: string
+  error?: string
 }
 
-export const QuillEditor = ({ value, onChange, editorRef, className }: QuillEditorProps) => {
+export const QuillEditor = ({ value, onChange, editorRef, className, error }: QuillEditorProps) => {
   const editorContainerRef = useRef<HTMLDivElement | null>(null) // Contêiner do editor
   const quillInstance = useRef<any | null>(null) // Instância do Quill
 
@@ -66,6 +67,7 @@ export const QuillEditor = ({ value, onChange, editorRef, className }: QuillEdit
   return (
     <div className={clsx("h-full w-full mb-[44px]", className)}>
       <div ref={editorContainerRef} />
+      {error && <p className="text-sm mt-0.5 text-red-600">{error}</p>}
     </div>
   )
 }
