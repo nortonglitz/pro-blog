@@ -1,1 +1,2 @@
-export { getPosts } from "./getPosts"
+export * from "./getPosts"
+export * from "./deletePost"
