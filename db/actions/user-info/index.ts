@@ -1,2 +1,2 @@
-export { getUserInfo } from "./getUserInfo"
-export { saveUserInfo } from "./saveUserInfo"
+export * from "./getUserInfo"
+export * from "./updateUserInfo"

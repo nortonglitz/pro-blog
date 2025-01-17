@@ -8,7 +8,7 @@ import { useZodForm } from "@/hooks"
 import { userInfoSchema } from "@/schemas/validations"
 import { useState } from "react"
 import { UserInfo } from "@/db/types"
-import { saveUserInfo } from "@/db/actions/user-info"
+import { updateUserInfo } from "@/db/actions/user-info"
 import { toast } from "react-hot-toast"
 
 const HELPERS = {
@@ -69,7 +69,7 @@ export const Form = ({ data }: FormProps) => {
   const handleSave = async (formData: any) => {
     try {
       setIsLoading(true)
-      await saveUserInfo(formData)
+      await updateUserInfo(formData)
       toast.success("Information updated")
     } catch (err) {
       if (process.env.NODE_ENV === "development") {

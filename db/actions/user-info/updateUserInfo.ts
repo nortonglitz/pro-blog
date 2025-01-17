@@ -6,7 +6,7 @@ import { userInfoTable } from "@/schemas/drizzle"
 import { NewUserInfo } from "@/db/types"
 import { userInfoSchema } from "@/schemas/validations"
 
-export const saveUserInfo = async (data: NewUserInfo) => {
+export const updateUserInfo = async (data: NewUserInfo) => {
   try {
     const { newURL: _, ...validatedData } = userInfoSchema.parse(data)
 
