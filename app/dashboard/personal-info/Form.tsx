@@ -44,8 +44,7 @@ export const Form = ({ data }: FormProps) => {
     validateField,
     watch,
     formState: { errors },
-    setValue,
-    reset
+    setValue
   } = useZodForm({
     schema: userInfoSchema,
     options: {
