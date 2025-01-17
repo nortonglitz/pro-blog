@@ -5,6 +5,10 @@ import { Popover, QuillEditor } from "@/components/UI/client"
 import { IconHelp } from "@tabler/icons-react"
 import Link from "next/link"
 import { useRef, useState } from "react"
+import { useZodForm } from "@/hooks"
+import { newPostSchema } from "@/schemas/validations"
+import { createPost } from "@/db/actions/posts"
+import toast from "react-hot-toast"
 
 const TIPS = {
   thumbnail:
@@ -40,47 +44,99 @@ const InputLabel = ({ children, htmlFor, title, tip }: InputLabelProps) => {
 }
 
 export default function NewPost() {
-  const [content, setContent] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+  const [deltaOps, setDeltaOps] = useState()
   const quillRef = useRef<any | null>(null)
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors }
+  } = useZodForm({
+    schema: newPostSchema
+  })
+
+  const onSubmit = async (data: any) => {
+    try {
+      setIsLoading(true)
+      const deltaData = {
+        ...data,
+        content: deltaOps
+      }
+      await createPost(deltaData)
+      toast.success("Post created")
+    } catch (err) {
+      if (process.env.NODE_ENV === "development") {
+        console.error("Error creating new post:", err)
+      }
+      toast.error("Something went wrong")
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return (
     <main className="h-screen overflow-y-auto px-2 pt-20 md:pt-10 md:px-10 pb-10 flex flex-col items-center">
       <header className="border-b border-neutral-800 pb-2 w-full mb-10">
         <h1 className="text-xl font-semibold tracking-wide uppercase">New post</h1>
       </header>
-      <section className="flex flex-col gap-5 w-full [&_h3]:text-lg h-4/5">
-        <InputLabel
-          tip={TIPS.thumbnail}
-          title="Thumbnail"
-          htmlFor="thumbnail"
-        >
-          <InputText
-            placeholder="Image URL"
-            id="thumbnail"
-          />
-        </InputLabel>
-        <InputLabel
-          title="Title"
-          htmlFor="title"
-        >
-          <InputText
-            placeholder="Title"
-            id="title"
-          />
-        </InputLabel>
+      <form
+        className="w-full h-full"
+        onSubmit={handleSubmit(data => onSubmit(data))}
+      >
+        <fieldset className="flex flex-col gap-5 w-full [&_h3]:text-lg h-4/5">
+          <InputLabel
+            tip={TIPS.thumbnail}
+            title="Thumbnail"
+            htmlFor="thumbnail"
+          >
+            <InputText
+              disabled={isLoading}
+              placeholder="Image URL"
+              id="thumbnail"
+              {...register("image_url")}
+              error={errors.image_url?.message}
+            />
+          </InputLabel>
+          <InputLabel
+            title="Title"
+            htmlFor="title"
+          >
+            <InputText
+              disabled={isLoading}
+              placeholder="Title"
+              id="title"
+              {...register("title")}
+              error={errors.title?.message}
+            />
+          </InputLabel>
 
-        <QuillEditor
-          value={content}
-          onChange={setContent}
-          editorRef={quill => (quillRef.current = quill)}
-        />
-      </section>
-      <section className="flex w-full justify-between mt-10">
-        <Link href="/dashboard/posts">
-          <Button>Dismiss</Button>
-        </Link>
-        <Button color="success">Save</Button>
-      </section>
+          <QuillEditor
+            disabled={isLoading}
+            value={watch("content")}
+            onChange={(html, deltaOps) => {
+              setValue("content", html)
+              setDeltaOps(deltaOps)
+            }}
+            editorRef={quill => (quillRef.current = quill)}
+            error={errors.content?.message}
+          />
+        </fieldset>
+        <fieldset className="flex w-full justify-between mt-10">
+          <Link href="/dashboard/posts">
+            <Button>Dismiss</Button>
+          </Link>
+          <Button
+            loading={isLoading}
+            color="success"
+            type="submit"
+          >
+            Save
+          </Button>
+        </fieldset>
+      </form>
     </main>
   )
 }
