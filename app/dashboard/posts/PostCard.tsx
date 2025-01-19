@@ -9,6 +9,7 @@ import { Post } from "@/db/types"
 import { format } from "date-fns"
 import { deletePost } from "@/db/actions/posts"
 import { usePosts } from "@/contexts/PostsPageContext"
+import Link from "next/link"
 
 type DeleteModalProps = {
   isOpen: boolean
@@ -101,12 +102,14 @@ export const PostCard = ({ data }: PostCardProps) => {
               >
                 <IconTrash stroke={1.5} />
               </Button>
-              <Button
-                variant="ghost"
-                color="primary"
-              >
-                <IconEdit stroke={1.5} />
-              </Button>
+              <Link href={`/dashboard/posts/${data.id}/edit`}>
+                <Button
+                  variant="ghost"
+                  color="primary"
+                >
+                  <IconEdit stroke={1.5} />
+                </Button>
+              </Link>
             </menu>
           </header>
           <p className="line-clamp-4 text-justify text-neutral-500">{text}</p>
