@@ -35,15 +35,13 @@ export const QuillEditor = ({
       quillInstance.current = new Quill(editorContainerRef.current, {
         theme: "snow",
         modules: {
-          toolbar: !disabled
-            ? [
-                ["bold", "italic", "underline", "strike"], // Formatação
-                [{ header: [1, 2, 3, false] }], // Títulos
-                [{ list: "ordered" }, { list: "bullet" }], // Listas
-                ["link"], // Links
-                ["clean"] // Limpar formatação
-              ]
-            : false
+          toolbar: [
+            ["bold", "italic", "underline", "strike"], // Formatação
+            [{ header: [1, 2, 3, false] }], // Títulos
+            [{ list: "ordered" }, { list: "bullet" }], // Listas
+            ["link"],
+            ["clean"] // Limpar formatação
+          ]
         },
         readOnly: disabled
       })
@@ -61,6 +59,11 @@ export const QuillEditor = ({
       if (editorRef) {
         editorRef(quillInstance.current)
       }
+
+      // Define o valor inicial (apenas no momento da inicialização)
+      if (value) {
+        quillInstance.current.clipboard.dangerouslyPasteHTML(value)
+      }
     }
 
     initializeQuill()
@@ -73,8 +76,11 @@ export const QuillEditor = ({
 
   // Atualiza o editor quando `value` mudar
   useEffect(() => {
-    if (quillInstance.current && value !== quillInstance.current.root.innerHTML) {
-      quillInstance.current.root.innerHTML = value
+    if (quillInstance.current) {
+      const currentContent = quillInstance.current.root.innerHTML
+      if (value !== currentContent) {
+        quillInstance.current.clipboard.dangerouslyPasteHTML(value)
+      }
     }
   }, [value])
 
