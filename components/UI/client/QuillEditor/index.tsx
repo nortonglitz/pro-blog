@@ -39,8 +39,7 @@ export const QuillEditor = ({
             ["link"], // Links
             ["clean"] // Limpar formatação
           ]
-        },
-        readOnly: disabled
+        }
       })
 
       quill.on("text-change", delta => {
@@ -63,6 +62,15 @@ export const QuillEditor = ({
       quillInstance.current?.off("text-change")
     }
   }, [editorContainerRef])
+
+  useEffect(() => {
+    if (!quillInstance.current) return
+    if (disabled) {
+      quillInstance.current.disable()
+    } else {
+      quillInstance.current.enable()
+    }
+  }, [disabled])
 
   return (
     <div
