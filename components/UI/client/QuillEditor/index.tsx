@@ -6,7 +6,7 @@ import "./styles.css"
 import { RefObject, useEffect, useRef } from "react"
 import Quill, { Delta } from "quill"
 
-interface QuillTestProps {
+interface QuillEditorProps {
   disabled?: boolean
   className?: string
   error?: string
@@ -20,7 +20,7 @@ export const QuillEditor = ({
   error,
   onChange,
   editorRef
-}: QuillTestProps) => {
+}: QuillEditorProps) => {
   const editorContainerRef = useRef<HTMLDivElement | null>(null)
   const quillInstance = useRef<Quill | null>(null)
 
