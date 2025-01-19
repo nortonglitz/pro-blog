@@ -10,6 +10,6 @@ export const getUserInfo = async () => {
     return userInfo[0] || null
   } catch (err) {
     console.error("Error fetching user info:", err)
-    throw new Error("Faled to fetch user info")
+    throw new Error("Failed to fetch user info")
   }
 }
