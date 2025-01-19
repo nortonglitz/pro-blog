@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/UI"
 import { IconTrash, IconEdit } from "@tabler/icons-react"
-import { useQuillPlainText } from "@/hooks"
 import clsx from "clsx"
 import { useState } from "react"
 import { Post } from "@/db/types"
@@ -10,6 +9,7 @@ import { format } from "date-fns"
 import { deletePost } from "@/db/actions/posts"
 import { usePosts } from "@/contexts/PostsPageContext"
 import Link from "next/link"
+import { extractTextFromDeltaOps } from "@/libs/quill"
 
 type DeleteModalProps = {
   isOpen: boolean
@@ -49,7 +49,7 @@ type PostCardProps = {
 export const PostCard = ({ data }: PostCardProps) => {
   if (!data) return null
 
-  const text = useQuillPlainText(data.content)
+  const text = extractTextFromDeltaOps(data.content)
   const { setPosts } = usePosts()
 
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
