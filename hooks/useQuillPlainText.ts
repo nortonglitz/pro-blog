@@ -1,7 +1,7 @@
 import { useMemo } from "react"
-import { QuillOps } from "@/types"
+import { Op } from "quill"
 
-export const useQuillPlainText = (ops: QuillOps): string => {
+export const useQuillPlainText = (ops: Op[]): string => {
   return useMemo(() => {
     if (!ops) return ""
 
