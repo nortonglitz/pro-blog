@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-export const siteOptionsSchema = z.object({
+export const metaFormSchema = z.object({
   title: z
     .string()
     .trim()
@@ -8,8 +8,8 @@ export const siteOptionsSchema = z.object({
     .max(60, "Title must have less than 60 characters"),
   description: z
     .string()
-    .min(1, "Description is required")
+    .min(1, "Content is required")
     .max(160, "Description must have less than 160 characters")
 })
 
-export type SiteOptionsSchema = z.infer<typeof siteOptionsSchema>
+export type MetaFormSchema = z.infer<typeof metaFormSchema>
