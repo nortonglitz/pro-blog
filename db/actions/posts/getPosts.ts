@@ -4,9 +4,13 @@ import db from "@/db"
 import { postsTable } from "@/schemas/drizzle"
 import { desc } from "drizzle-orm"
 
-export const getPosts = async () => {
+export const getPosts = async (limit: number = 20) => {
   try {
-    const posts = await db.select().from(postsTable).orderBy(desc(postsTable.created_at)).limit(20)
+    const posts = await db
+      .select()
+      .from(postsTable)
+      .orderBy(desc(postsTable.created_at))
+      .limit(limit)
 
     return posts || null
   } catch (err) {
