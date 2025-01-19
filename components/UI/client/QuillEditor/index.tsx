@@ -1,88 +1,68 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import clsx from "clsx"
 import "quill/dist/quill.snow.css"
 import "./styles.css"
-import clsx from "clsx"
+import { RefObject, useEffect, useRef } from "react"
+import Quill, { Delta } from "quill"
 
-interface QuillEditorProps {
-  value: string // Valor inicial (HTML)
-  onChange: (html: string, ops: any) => void // Retorna o HTML e os `ops` (JSON plano)
-  editorRef?: (quill: any) => void // Passa a instância do editor para o pai
+interface QuillTestProps {
+  disabled?: boolean
   className?: string
   error?: string
-  disabled?: boolean // Desabilita o editor
+  onChange?: (delta: Delta, html: string) => void
+  editorRef?: RefObject<Quill | null>
 }
 
 export const QuillEditor = ({
-  value,
-  onChange,
-  editorRef,
+  disabled,
   className,
   error,
-  disabled = false
-}: QuillEditorProps) => {
-  const editorContainerRef = useRef<HTMLDivElement | null>(null) // Ref do contêiner do editor
-  const quillInstance = useRef<any | null>(null) // Instância do Quill
+  onChange,
+  editorRef
+}: QuillTestProps) => {
+  const editorContainerRef = useRef<HTMLDivElement | null>(null)
+  const quillInstance = useRef<Quill | null>(null)
 
-  // Inicializa o Quill
   useEffect(() => {
     const initializeQuill = async () => {
-      if (!editorContainerRef.current || quillInstance.current) return
+      if (!editorContainerRef.current) return
 
       const Quill = (await import("quill")).default
-
-      quillInstance.current = new Quill(editorContainerRef.current, {
+      const quill = new Quill(editorContainerRef.current, {
         theme: "snow",
         modules: {
           toolbar: [
             ["bold", "italic", "underline", "strike"], // Formatação
             [{ header: [1, 2, 3, false] }], // Títulos
             [{ list: "ordered" }, { list: "bullet" }], // Listas
-            ["link"],
+            ["link"], // Links
             ["clean"] // Limpar formatação
           ]
         },
         readOnly: disabled
       })
 
-      // Lida com alterações de texto
-      quillInstance.current.on("text-change", (delta: any) => {
-        if (!disabled) {
-          const html = quillInstance.current.root.innerHTML // HTML atual
-          const ops = delta.ops // Extrai apenas os `ops` do Delta
-          onChange(html, ops) // Passa HTML e `ops` ao pai
+      quill.on("text-change", delta => {
+        if (onChange) {
+          onChange(delta, quill.getSemanticHTML())
         }
       })
 
-      // Passa a instância para o pai (opcional)
+      quillInstance.current = quill
       if (editorRef) {
-        editorRef(quillInstance.current)
-      }
-
-      // Define o valor inicial (apenas no momento da inicialização)
-      if (value) {
-        quillInstance.current.clipboard.dangerouslyPasteHTML(value)
+        editorRef.current = quill
       }
     }
 
-    initializeQuill()
+    if (!quillInstance.current) {
+      initializeQuill()
+    }
 
     return () => {
       quillInstance.current?.off("text-change")
-      quillInstance.current = null
     }
-  }, [disabled])
-
-  // Atualiza o editor quando `value` mudar
-  useEffect(() => {
-    if (quillInstance.current) {
-      const currentContent = quillInstance.current.root.innerHTML
-      if (value !== currentContent) {
-        quillInstance.current.clipboard.dangerouslyPasteHTML(value)
-      }
-    }
-  }, [value])
+  }, [editorContainerRef])
 
   return (
     <div
