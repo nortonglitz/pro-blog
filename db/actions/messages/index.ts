@@ -1,2 +1,3 @@
-export { getMessages } from "./getMessages"
-export { updateMessageReadStatus } from "./updateMessageReadStatus"
+export * from "./getMessages"
+export * from "./sendMessage"
+export * from "./updateMessageReadStatus"
