@@ -1,9 +1,11 @@
 import { InputText } from "@/components"
-import { POSTS } from "@/content"
 import { IconSearch } from "@tabler/icons-react"
-import { useId } from "react"
+import { getPosts } from "@/db/actions/posts"
+import Link from "next/link"
 
-export const BlogNavigation = () => {
+export const BlogNavigation = async () => {
+  const posts = await getPosts(10)
+
   return (
     <aside className="py-10 pl-10 pr-5 gap-5 flex flex-col justify-center">
       <section>
@@ -20,26 +22,28 @@ export const BlogNavigation = () => {
           </h4>
         </header>
         <ul className="list-[square]">
-          {POSTS.slice(0, 6).map(({ title }) => (
+          {posts.map(({ title, id }) => (
             <li
-              key={`post-${useId()}`}
+              key={`post-${id}`}
               className="marker:text-emerald-900 hover:marker:text-emerald-500"
             >
-              <p
-                className="
-                  transition-all
-                  duration-300
-                  text-neutral-400
-                  line-clamp-2
+              <Link href={`/blog/posts/${id}`}>
+                <p
+                  className="
+                    transition-all
+                    duration-300
+                    text-neutral-400
+                    line-clamp-2
 
-                  hover:underline
-                  hover:underline-offset-4
-                  hover:cursor-pointer
-                  hover:text-white
-              "
-              >
-                {title}
-              </p>
+                    hover:underline
+                    hover:underline-offset-4
+                    hover:cursor-pointer
+                    hover:text-white
+                "
+                >
+                  {title}
+                </p>
+              </Link>
             </li>
           ))}
         </ul>
