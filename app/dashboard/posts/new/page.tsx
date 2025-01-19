@@ -9,6 +9,7 @@ import { useZodForm } from "@/hooks"
 import { newPostSchema } from "@/schemas/validations"
 import { createPost } from "@/db/actions/posts"
 import toast from "react-hot-toast"
+import { Op } from "quill"
 
 const TIPS = {
   thumbnail:
@@ -45,7 +46,7 @@ const InputLabel = ({ children, htmlFor, title, tip }: InputLabelProps) => {
 
 export default function NewPost() {
   const [isLoading, setIsLoading] = useState(false)
-  const [deltaOps, setDeltaOps] = useState()
+  const [deltaOps, setDeltaOps] = useState<Op[]>()
   const quillRef = useRef<any | null>(null)
 
   const {
@@ -115,12 +116,11 @@ export default function NewPost() {
 
           <QuillEditor
             disabled={isLoading}
-            value={watch("content")}
-            onChange={(html, deltaOps) => {
+            onChange={(delta, html) => {
               setValue("content", html)
-              setDeltaOps(deltaOps)
+              setDeltaOps(delta.ops)
             }}
-            editorRef={quill => (quillRef.current = quill)}
+            editorRef={quillRef}
             error={errors.content?.message}
           />
         </fieldset>
