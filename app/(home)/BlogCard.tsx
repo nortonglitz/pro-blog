@@ -1,5 +1,3 @@
-import Image from "next/image"
-
 type BlogCardProps = {
   content: string
   imgUrl: string
@@ -20,10 +18,9 @@ export const BlogCard = ({ content, imgUrl, title, className = "h-96" }: BlogCar
     `}
   >
     <figure className="relative overflow-hidden h-full">
-      <Image
-        className="object-cover transition duration-300"
+      <img
+        className="object-cover transition duration-300 h-full w-full"
         src={imgUrl}
-        fill
         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
         alt="title image"
       />
