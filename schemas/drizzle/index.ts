@@ -1,3 +1,4 @@
-export { postsTable } from "./posts"
-export { messagesTable } from "./messages"
-export { userInfoTable } from "./user-info"
+export * from "./posts"
+export * from "./messages"
+export * from "./user-info"
+export * from "./meta-description"
