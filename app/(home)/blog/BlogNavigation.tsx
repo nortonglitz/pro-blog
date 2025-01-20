@@ -4,7 +4,7 @@ import { getPosts } from "@/db/actions/posts"
 import Link from "next/link"
 
 export const BlogNavigation = async () => {
-  const posts = await getPosts(10)
+  const posts = await getPosts(5)
 
   return (
     <aside className="py-10 pl-10 pr-5 gap-5 flex flex-col justify-center">
@@ -21,7 +21,7 @@ export const BlogNavigation = async () => {
             Latest posts
           </h4>
         </header>
-        <ul className="list-[square]">
+        <ul className="list-[square] [&_li]:mt-5">
           {posts.map(({ title, id }) => (
             <li
               key={`post-${id}`}
