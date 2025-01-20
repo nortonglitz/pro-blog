@@ -20,7 +20,7 @@ type DeleteModalProps = {
 const DeleteModal = ({ isOpen, onClose, onDelete }: DeleteModalProps) => (
   <div
     className={clsx(
-      "absolute inset-0 bg-black/50 backdrop-blur-sm z-10 flex items-center justify-center",
+      "absolute inset-0 left-0 right-0 top-0 bg-black/50 backdrop-blur-sm z-10 flex items-center justify-center",
       isOpen ? "flex" : "hidden"
     )}
     role="dialog"
@@ -28,7 +28,7 @@ const DeleteModal = ({ isOpen, onClose, onDelete }: DeleteModalProps) => (
   >
     <section>
       <h4 className="text-lg font-semibold">Are you sure you want to delete this post?</h4>
-      <p className="text-center">This action can not be undone.</p>
+      <p className="text-center">This action can not be undone</p>
       <div className="flex items-center gap-5 w-full justify-center mt-10">
         <Button onClick={onClose}>Keep post</Button>
         <Button
@@ -60,7 +60,7 @@ export const PostCard = ({ data }: PostCardProps) => {
   }
 
   return (
-    <article className="transition flex h-96 xl:h-48 hover:bg-neutral-900 border border-neutral-800 group relative flex-wrap xl:flex-nowrap">
+    <article className="overflow-hidden transition flex h-96 xl:h-48 hover:bg-neutral-900 border border-neutral-800 group relative flex-wrap xl:flex-nowrap">
       <DeleteModal
         isOpen={openDeleteModal}
         onClose={() => setOpenDeleteModal(false)}
