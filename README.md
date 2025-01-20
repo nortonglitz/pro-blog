@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pro Blog
 
-## Getting Started
+Pro Blog é um projeto para criação e gerenciamento de posts através de um painel administrativo e a visualização de conteúdos em um blog público. Ambos com responsividade para diferentes telas de dispositivos.
 
-First, run the development server:
+## 🚀 Demonstração
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Blog:** [https://pro-blog-bice.vercel.app/blog](https://pro-blog-bice.vercel.app/blog)
+- **Dashboard:** [https://pro-blog-bice.vercel.app/dashboard](https://pro-blog-bice.vercel.app/dashboard)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tecnologias Utilizadas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework Frontend:** [Next.js](https://nextjs.org/)
+- **Componentes:** [React](https://reactjs.org/)
+- **Validação de Formulários:** [Zod](https://zod.dev/) com [React Hook Form](https://react-hook-form.com/)
+- **Estilização:** [TailwindCSS](https://tailwindcss.com/) e [clsx](https://github.com/lukeed/clsx)
+- **Hospedagem:** [Vercel](https://vercel.com/) e [Neon](https://neon.tech/home)
+- **Editor de Texto:** [Quill](https://quilljs.com/)
+- **Banco de Dados:** [PostgreSQL](https://www.postgresql.org/)
+- **ORM:** [Drizzle](https://orm.drizzle.team/)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📂 Estrutura do Projeto
 
-## Learn More
+O projeto está dividido em duas áreas principais:
 
-To learn more about Next.js, take a look at the following resources:
+- **Dashboard (/dashboard):**  
+   Área administrativa onde é possível gerenciar posts, gerenciar mensagens e personalziar o blog.
+- **Blog (/blog):**  
+   Parte pública onde visitantes podem visualizar os posts publicados e entrar em contato com o usuário.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📋 Funcionalidades
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Implementadas
 
-## Deploy on Vercel
+- [x] Criar, editar e excluir posts no painel de controle.
+- [x] Exibir posts publicados na página pública do blog.
+- [x] Interface simples e funcional do painel de controle.
+- [x] Personalizar o título, descrição do profisisonal, suas redes sociais e meta dados.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Em Desenvolvimento
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [ ] Sistema de autenticação para proteger o acesso ao painel controle.
+- [ ] Possibilidade de inserir imagem no posts.
+- [ ] Inserir recaptcha no formulário de contato
