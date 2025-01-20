@@ -4,9 +4,10 @@ import { InputText } from "@/components"
 import { IconSearch, IconX } from "@tabler/icons-react"
 import { getPosts } from "@/db/actions/posts"
 import { extractTextFromDeltaOps } from "@/libs/quill"
+import { MorePosts } from "./MorePosts"
 
 export default async function Home() {
-  const posts = await getPosts(20)
+  const posts = await getPosts(10)
 
   return (
     <main className="px-2 md:px-5 h-screen overflow-y-auto py-20">
@@ -39,6 +40,7 @@ export default async function Home() {
               />
             </Link>
           ))}
+          <MorePosts />
         </div>
       </section>
     </main>
