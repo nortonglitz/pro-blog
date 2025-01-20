@@ -42,9 +42,9 @@ export const QuillEditor = ({
         }
       })
 
-      quill.on("text-change", delta => {
+      quill.on("text-change", (delta, oldDelta) => {
         if (onChange) {
-          onChange(delta, quill.getSemanticHTML())
+          onChange(oldDelta.compose(delta), quill.getSemanticHTML())
         }
       })
 
