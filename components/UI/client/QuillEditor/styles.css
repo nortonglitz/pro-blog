@@ -92,3 +92,24 @@
   filter: brightness(0) saturate(100%) invert(57%) sepia(46%) saturate(2845%) hue-rotate(148deg)
     brightness(95%) contrast(95%);
 }
+
+.ql-header-1 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+
+.ql-header-2 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+
+.ql-header-3 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
