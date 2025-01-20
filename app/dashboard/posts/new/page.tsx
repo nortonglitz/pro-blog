@@ -52,7 +52,6 @@ export default function NewPost() {
   const {
     register,
     handleSubmit,
-    watch,
     setValue,
     formState: { errors }
   } = useZodForm({
@@ -87,7 +86,7 @@ export default function NewPost() {
         className="w-full h-full"
         onSubmit={handleSubmit(data => onSubmit(data))}
       >
-        <fieldset className="flex flex-col gap-5 w-full [&_h3]:text-lg h-4/5">
+        <fieldset className="flex flex-col gap-5 w-full [&_h3]:text-lg h-fit">
           <InputLabel
             tip={TIPS.thumbnail}
             title="Thumbnail"
@@ -115,6 +114,7 @@ export default function NewPost() {
           </InputLabel>
 
           <QuillEditor
+            className="h-[30rem]"
             disabled={isLoading}
             onChange={(delta, html) => {
               setValue("content", html)
@@ -124,7 +124,7 @@ export default function NewPost() {
             error={errors.content?.message}
           />
         </fieldset>
-        <fieldset className="flex w-full justify-between mt-10">
+        <fieldset className="flex w-full justify-between mt-20">
           <Link href="/dashboard/posts">
             <Button>Dismiss</Button>
           </Link>

@@ -1,10 +1,14 @@
-import { TextLoop, InputText, TextArea, Button } from "@/components"
+import { TextLoop, Button } from "@/components"
 import { BlogCard } from "./BlogCard"
 import { BlogCardMore } from "./BlogCardMore"
-import { USER_CONTENT, LINKS, POSTS } from "@/content"
+import { LINKS } from "@/content"
 import Image from "next/image"
 import Link from "next/link"
-import { useId } from "react"
+import { getPosts } from "@/db/actions/posts"
+import { extractTextFromDeltaOps } from "@/libs/quill"
+import { getUserInfo } from "@/db/actions/user-info"
+import { Form } from "./Form"
+import { IconFileDescription } from "@tabler/icons-react"
 
 const linksId = LINKS.map(title => title.replace(" ", "-").toLocaleLowerCase())
 
@@ -26,7 +30,9 @@ const Title = ({ text }: { text: string }) => (
   </h2>
 )
 
-export default function Home() {
+export default async function Home() {
+  const posts = await getPosts(7)
+  const userInfo = await getUserInfo()
   return (
     <main
       className="
@@ -62,18 +68,11 @@ export default function Home() {
         <div className="text-justify max-w-prose md:min-w-[40ch] min-w-full flex-1">
           <header>
             <small className="uppercase text-emerald-500">
-              <TextLoop texts={USER_CONTENT.job} />
+              <TextLoop texts={userInfo.jobs} />
             </small>
-            <h2 className="text-4xl font-bold mb-10">{USER_CONTENT.name}</h2>
+            <h2 className="text-4xl font-bold mb-10">{`${userInfo.first_name} ${userInfo.last_name}`}</h2>
           </header>
-          {USER_CONTENT.about.map((paragraph, i) => (
-            <p
-              key={`desc-${i}`}
-              className="indent-8 text-neutral-200"
-            >
-              {paragraph}
-            </p>
-          ))}
+          <p className="indent-8 text-neutral-200">{userInfo.about}</p>
           <Link href={`#${linksId[linksId.length - 1]}`}>
             <Button className="mt-10">Contact me</Button>
           </Link>
@@ -100,20 +99,23 @@ export default function Home() {
           <Title text={LINKS[1]} />
         </header>
         <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 gap-10">
-          {POSTS.slice(0, 7).map(({ title, content, image_url }) => (
+          {posts.map(({ title, content, id, image_url }) => (
             <Link
-              href="/blog/posts/2"
-              key={`blog-card-${useId()}`}
+              href={`/blog/posts/${id}`}
+              key={`blog-card-${id}`}
             >
               <BlogCard
                 title={title}
-                content={content}
+                content={extractTextFromDeltaOps(content)}
                 imgUrl={image_url}
               />
             </Link>
           ))}
           <Link href="/blog">
-            <BlogCardMore />
+            <BlogCardMore
+              title="See all posts"
+              icon={IconFileDescription}
+            />
           </Link>
         </div>
       </section>
@@ -129,26 +131,7 @@ export default function Home() {
           <Title text={LINKS[LINKS.length - 1]} />
         </header>
         <div className="flex justify-center">
-          <form className="flex flex-col w-[60ch] gap-5">
-            <InputText
-              type="email"
-              placeholder="E-mail"
-            />
-            <InputText
-              type="text"
-              placeholder="Subject"
-            />
-            <TextArea
-              rows={10}
-              placeholder="Type your message"
-            />
-            <Button
-              type="submit"
-              className="self-end"
-            >
-              Send message
-            </Button>
-          </form>
+          <Form />
         </div>
       </section>
     </main>

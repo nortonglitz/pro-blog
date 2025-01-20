@@ -73,13 +73,7 @@ export const QuillEditor = ({
   }, [disabled])
 
   return (
-    <div
-      className={clsx(
-        "h-full w-full mb-[44px]",
-        className,
-        disabled && "opacity-50 cursor-not-allowed"
-      )}
-    >
+    <div className={clsx("w-full", disabled && "opacity-50 cursor-not-allowed", className)}>
       <div ref={editorContainerRef} />
       {error && <p className="text-sm mt-0.5 text-red-600">{error}</p>}
     </div>

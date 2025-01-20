@@ -120,7 +120,7 @@ export default function EditPostPage() {
       className="w-full h-full"
       onSubmit={handleSubmit(data => onSubmit(data))}
     >
-      <fieldset className="flex flex-col gap-5 w-full [&_h3]:text-lg h-4/5">
+      <fieldset className="flex flex-col gap-5 w-full [&_h3]:text-lg h-fit">
         <InputLabel
           tip={TIPS.thumbnail}
           title="Thumbnail"
@@ -148,6 +148,7 @@ export default function EditPostPage() {
         </InputLabel>
 
         <QuillEditor
+          className="h-[30rem]"
           disabled={isLoading}
           onChange={(delta, html) => {
             setDeltaOps(delta.ops)
@@ -157,7 +158,7 @@ export default function EditPostPage() {
           error={errors.content?.message}
         />
       </fieldset>
-      <fieldset className="flex w-full justify-between mt-10">
+      <fieldset className="flex w-full justify-between mt-20">
         <Link href="/dashboard/posts">
           <Button>Dismiss</Button>
         </Link>

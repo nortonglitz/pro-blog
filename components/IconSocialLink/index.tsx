@@ -12,6 +12,7 @@ import {
   IconBrandTikTok,
   IconBrandYoutube
 } from "@/components/icons"
+import { IconQuestionMark } from "@tabler/icons-react"
 
 const icons: Record<SocialMedia, React.FC<IconProps>> = {
   github: IconBrandGithub,
@@ -26,7 +27,7 @@ const icons: Record<SocialMedia, React.FC<IconProps>> = {
 
 type IconSocialLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> &
   LinkProps & {
-    social: SocialMedia
+    social: string
   }
 
 export const IconSocialLink = ({
@@ -36,7 +37,13 @@ export const IconSocialLink = ({
   social,
   ...props
 }: IconSocialLinkProps) => {
-  const Icon = icons[social]
+  let Icon = null
+
+  if (social in icons) {
+    Icon = icons[social as SocialMedia]
+  } else {
+    Icon = IconQuestionMark
+  }
 
   return (
     <Link
