@@ -1,4 +1,4 @@
-import { TextLoop, InputText, TextArea, Button } from "@/components"
+import { TextLoop, Button } from "@/components"
 import { BlogCard } from "./BlogCard"
 import { BlogCardMore } from "./BlogCardMore"
 import { LINKS } from "@/content"
@@ -8,6 +8,7 @@ import { getPosts } from "@/db/actions/posts"
 import { extractTextFromDeltaOps } from "@/libs/quill"
 import { getUserInfo } from "@/db/actions/user-info"
 import { Form } from "./Form"
+import { IconFileDescription } from "@tabler/icons-react"
 
 const linksId = LINKS.map(title => title.replace(" ", "-").toLocaleLowerCase())
 
@@ -111,7 +112,10 @@ export default async function Home() {
             </Link>
           ))}
           <Link href="/blog">
-            <BlogCardMore />
+            <BlogCardMore
+              title="See all posts"
+              icon={IconFileDescription}
+            />
           </Link>
         </div>
       </section>
