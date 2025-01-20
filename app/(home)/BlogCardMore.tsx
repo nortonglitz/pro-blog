@@ -1,9 +1,21 @@
-import { IconFileDescription } from "@tabler/icons-react"
+import { Spinner } from "@/components/UI"
+import { Icon } from "@tabler/icons-react"
 
-type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  title: string
+  icon?: Icon
+  loading?: boolean
+}
 
-export const BlogCardMore = ({ ...props }: ButtonProps) => (
+export const BlogCardMore = ({
+  icon: Icon,
+  title,
+  disabled,
+  loading = false,
+  ...props
+}: ButtonProps) => (
   <button
+    disabled={disabled || loading}
     className="
       transition-[background]
       duration-300
@@ -22,13 +34,25 @@ export const BlogCardMore = ({ ...props }: ButtonProps) => (
       hover:outline-4
       hover:outline-emerald-500
       cursor-pointer
+
+      disabled:cursor-not-allowed
+      disabled:opacity-50
     "
     {...props}
   >
-    <IconFileDescription
-      size="4rem"
-      stroke="1px"
-    />
-    <p className="text-xl">See all posts</p>
+    {loading ? (
+      <Spinner
+        size="xl"
+        className="mb-2"
+      />
+    ) : (
+      Icon && (
+        <Icon
+          size="4rem"
+          stroke="1px"
+        />
+      )
+    )}
+    <p className="text-xl">{title}</p>
   </button>
 )
