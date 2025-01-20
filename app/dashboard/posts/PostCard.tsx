@@ -66,13 +66,19 @@ export const PostCard = ({ data }: PostCardProps) => {
         onClose={() => setOpenDeleteModal(false)}
         onDelete={() => handleDeletePost(data.id)}
       />
-      <figure className="relative w-full h-48 xl:w-52 flex-shrink-0">
-        <img
-          loading="lazy"
-          className="object-cover w-full h-full"
-          src={data.image_url}
-          alt={`${data.title}`}
-        />
+      <figure className="relative w-full h-48 xl:w-52 flex-shrink-0 overflow-hidden">
+        <Link
+          href={`/blog/posts/${data.id}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            loading="lazy"
+            className="object-cover w-full h-full hover:scale-110 transition duration-300"
+            src={data.image_url}
+            alt={`${data.title}`}
+          />
+        </Link>
       </figure>
       <section className="px-5 py-2 flex flex-col justify-between w-full">
         <div>
