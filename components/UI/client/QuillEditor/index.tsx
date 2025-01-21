@@ -23,6 +23,11 @@ export const QuillEditor = ({
 }: QuillEditorProps) => {
   const editorContainerRef = useRef<HTMLDivElement | null>(null)
   const quillInstance = useRef<Quill | null>(null)
+  const onChangeRef = useRef(onChange)
+
+  useEffect(() => {
+    onChangeRef.current = onChange
+  }, [onChange])
 
   useEffect(() => {
     const initializeQuill = async () => {
@@ -43,8 +48,8 @@ export const QuillEditor = ({
       })
 
       quill.on("text-change", (delta, oldDelta) => {
-        if (onChange) {
-          onChange(oldDelta.compose(delta), quill.getSemanticHTML())
+        if (onChangeRef.current) {
+          onChangeRef.current(oldDelta.compose(delta), quill.getSemanticHTML())
         }
       })
 
@@ -61,7 +66,7 @@ export const QuillEditor = ({
     return () => {
       quillInstance.current?.off("text-change")
     }
-  })
+  }, [editorRef])
 
   useEffect(() => {
     if (!quillInstance.current) return

@@ -84,7 +84,6 @@ export default function EditPostPage() {
   }, [id, reset, setValue])
 
   const onSubmit = async (data: NewPostSchema) => {
-    console.log(data)
     try {
       setIsLoading(true)
       const deltaData = {
@@ -154,7 +153,6 @@ export default function EditPostPage() {
           onChange={(delta, html) => {
             setDeltaOps(delta.ops)
             setValue("content", html)
-            console.log(delta, html)
           }}
           editorRef={quillRef}
           error={errors.content?.message}
