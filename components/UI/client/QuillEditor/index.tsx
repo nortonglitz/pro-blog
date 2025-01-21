@@ -61,7 +61,7 @@ export const QuillEditor = ({
     return () => {
       quillInstance.current?.off("text-change")
     }
-  }, [editorContainerRef])
+  })
 
   useEffect(() => {
     if (!quillInstance.current) return

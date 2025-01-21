@@ -47,12 +47,12 @@ type PostCardProps = {
 }
 
 export const PostCard = ({ data }: PostCardProps) => {
+  const { setPosts } = usePosts()
+  const [openDeleteModal, setOpenDeleteModal] = useState(false)
+
   if (!data) return null
 
   const text = extractTextFromDeltaOps(data.content)
-  const { setPosts } = usePosts()
-
-  const [openDeleteModal, setOpenDeleteModal] = useState(false)
 
   const handleDeletePost = (id: number) => {
     deletePost(id)

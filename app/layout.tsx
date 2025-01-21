@@ -1,6 +1,4 @@
 import "./globals.css"
-import type { Metadata } from "next"
-import { USER_CONTENT } from "@/content"
 import { Jura } from "next/font/google"
 import { Onest } from "next/font/google"
 import { Azeret_Mono } from "next/font/google"

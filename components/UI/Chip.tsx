@@ -37,42 +37,49 @@ export const Chip = ({
   children,
   ...props
 }: ChipProps) => {
-  return React.createElement(as === "button" ? "button" : "span", {
-    type: as === "button" ? "button" : undefined,
-    className: clsx(
-      chipStyles,
-      as === "button" && [buttonStyles, disabledStyles],
-      RightIcon && "pl-2",
-      LeftIcon && "pr-2",
-      className
-    ),
-    children: (
-      <>
-        {LeftIcon &&
-          React.createElement(leftIconAs === "button" ? "button" : "span", {
+  return React.createElement(
+    as === "button" ? "button" : "span",
+    {
+      type: as === "button" ? "button" : undefined,
+      className: clsx(
+        chipStyles,
+        as === "button" && [buttonStyles, disabledStyles],
+        RightIcon && "pl-2",
+        LeftIcon && "pr-2",
+        className
+      ),
+      ...props
+    },
+    <>
+      {LeftIcon &&
+        React.createElement(
+          leftIconAs === "button" ? "button" : "span",
+          {
             onClick: onLeftIconClick,
             className: clsx(
               iconStyles,
               "mr-1",
               leftIconAs === "button" && [buttonStyles, disabledStyles],
               leftIconClassName
-            ),
-            children: <LeftIcon size="1rem" />
-          })}
-        <span className={clsx("py-1", textClassName)}>{children}</span>
-        {RightIcon &&
-          React.createElement(rightIconAs === "button" ? "button" : "span", {
+            )
+          },
+          <LeftIcon size="1rem" />
+        )}
+      <span className={clsx("py-1", textClassName)}>{children}</span>
+      {RightIcon &&
+        React.createElement(
+          rightIconAs === "button" ? "button" : "span",
+          {
             onClick: onRightIconClick,
             className: clsx(
               iconStyles,
               "ml-1",
               rightIconAs === "button" && [buttonStyles, disabledStyles],
               rightIconClassName
-            ),
-            children: <RightIcon size="1rem" />
-          })}
-      </>
-    ),
-    ...props
-  })
+            )
+          },
+          <RightIcon size="1rem" />
+        )}
+    </>
+  )
 }

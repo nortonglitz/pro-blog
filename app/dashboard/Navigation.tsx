@@ -3,7 +3,6 @@
 import clsx from "clsx"
 
 import { usePathname } from "next/navigation"
-import { useId } from "react"
 import { IconId, IconSettings, IconMessage, IconBook, IconDashboard } from "@tabler/icons-react"
 import Link from "next/link"
 import { MenuMobile } from "./MenuMobile"
@@ -34,7 +33,7 @@ export const Navigation = () => {
         </header>
         <ul>
           {LINKS.map(({ href, label, icon: Icon }) => (
-            <li key={`${label}-${useId()}`}>
+            <li key={`${label}-link`}>
               <Link
                 href={href}
                 className={clsx(

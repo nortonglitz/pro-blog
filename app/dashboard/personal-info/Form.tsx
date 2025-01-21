@@ -5,11 +5,11 @@ import { Button, TextArea, Chip, InputText } from "@/components/UI"
 import { IconPlus, IconHelp, IconX } from "@tabler/icons-react"
 import { getSiteNameFromURL } from "@/libs/url"
 import { useZodForm } from "@/hooks"
-import { userInfoSchema } from "@/schemas/validations"
+import { userInfoSchema, UserInfoSchema } from "@/schemas/validations"
 import { useState } from "react"
-import { UserInfo } from "@/db/types"
 import { updateUserInfo } from "@/db/actions/user-info"
 import { toast } from "react-hot-toast"
+import { UserInfo } from "@/db/types"
 
 const HELPERS = {
   name: "This will be used to create your logo. Avoid using long names to prevent disrupting the layout.",
@@ -66,7 +66,7 @@ export const Form = ({ data }: FormProps) => {
 
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleSave = async (formData: any) => {
+  const handleSave = async (formData: UserInfoSchema) => {
     try {
       setIsLoading(true)
       await updateUserInfo(formData)
