@@ -5,11 +5,13 @@ import { Popover, QuillEditor } from "@/components/UI/client"
 import { IconHelp } from "@tabler/icons-react"
 import Link from "next/link"
 import { useRef, useState } from "react"
+import { usePosts } from "@/contexts/PostsPageContext"
 import { useZodForm } from "@/hooks"
 import { newPostSchema, NewPostSchema } from "@/schemas/validations"
 import { createPost } from "@/db/actions/posts"
 import toast from "react-hot-toast"
 import Quill, { Op } from "quill"
+import { useRouter } from "next/navigation"
 
 const TIPS = {
   thumbnail:
@@ -48,6 +50,8 @@ export default function NewPost() {
   const [isLoading, setIsLoading] = useState(false)
   const [deltaOps, setDeltaOps] = useState<Op[]>()
   const quillRef = useRef<Quill | null>(null)
+  const { setPosts } = usePosts()
+  const router = useRouter()
 
   const {
     register,
@@ -65,7 +69,14 @@ export default function NewPost() {
         ...data,
         content: deltaOps as Op[]
       }
-      await createPost(deltaData)
+      const newPost = await createPost(deltaData)
+      setPosts(oldPosts => {
+        if (oldPosts) {
+          return [newPost, ...oldPosts]
+        }
+        return oldPosts
+      })
+      router.push("/dashboard/posts")
       toast.success("Post created")
     } catch (err) {
       if (process.env.NODE_ENV === "development") {
