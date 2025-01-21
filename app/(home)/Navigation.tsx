@@ -10,7 +10,7 @@ export const Navigation = async () => {
 
   return (
     <>
-      <MenuMobile />
+      <MenuMobile userInfo={userInfo} />
       <aside
         className="
           hidden
