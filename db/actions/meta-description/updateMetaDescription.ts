@@ -5,6 +5,7 @@ import { eq } from "drizzle-orm"
 import { metaDescriptionTable } from "@/schemas/drizzle"
 import { metaFormSchema } from "@/schemas/validations"
 import { NewMetaDescription } from "@/db/types"
+import { revalidatePath } from "next/cache"
 
 export const updateMetaDescription = async (data: NewMetaDescription) => {
   try {
@@ -28,5 +29,7 @@ export const updateMetaDescription = async (data: NewMetaDescription) => {
   } catch (err) {
     console.error("Error updating meta description:", err)
     throw new Error("Failed to update meta description")
+  } finally {
+    revalidatePath("/")
   }
 }

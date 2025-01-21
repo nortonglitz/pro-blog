@@ -4,6 +4,7 @@ import db from "@/db"
 import { postsTable } from "@/schemas/drizzle"
 import { eq } from "drizzle-orm"
 import { NewPost } from "@/db/types"
+import { revalidatePath } from "next/cache"
 
 export const editPost = async (id: number, updatedPost: NewPost) => {
   try {
@@ -25,5 +26,8 @@ export const editPost = async (id: number, updatedPost: NewPost) => {
   } catch (err) {
     console.error("Error editing post:", err)
     throw new Error("Failed to edit post")
+  } finally {
+    revalidatePath("/")
+    revalidatePath("/blog")
   }
 }
