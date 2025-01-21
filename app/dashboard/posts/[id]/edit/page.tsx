@@ -9,9 +9,10 @@ import { useZodForm } from "@/hooks"
 import { newPostSchema, NewPostSchema } from "@/schemas/validations"
 import { editPost, getPostById } from "@/db/actions/posts"
 import toast from "react-hot-toast"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { QuillDeltaToHtmlConverter } from "quill-delta-to-html"
 import Quill, { Op } from "quill"
+import { usePosts } from "@/contexts/PostsPageContext"
 
 const TIPS = {
   thumbnail:
@@ -52,7 +53,9 @@ export default function EditPostPage() {
   const [isLoading, setIsLoading] = useState(true)
 
   const [deltaOps, setDeltaOps] = useState<Op[]>([])
+  const { setPosts } = usePosts()
   const quillRef = useRef<Quill | null>(null)
+  const router = useRouter()
 
   const {
     register,
@@ -91,7 +94,15 @@ export default function EditPostPage() {
         content: deltaOps
       }
 
-      await editPost(id, deltaData)
+      const editedPost = await editPost(id, deltaData)
+      setPosts(oldPosts => {
+        if (oldPosts) {
+          return oldPosts.map(post => (post.id === editedPost.id ? editedPost : post))
+        }
+        return oldPosts
+      })
+
+      router.push("/dashboard/posts")
       toast.success("Post edited")
     } catch (err) {
       if (process.env.NODE_ENV === "development") {
