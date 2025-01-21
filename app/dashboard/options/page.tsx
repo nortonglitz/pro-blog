@@ -16,7 +16,7 @@ export default function Options() {
       try {
         const data = await getMetaDescription()
         setMetaDescription(data)
-      } catch (err) {
+      } catch {
         if (process.env.NODE_ENV === "development") {
           console.error("Error fetching meta description")
         }

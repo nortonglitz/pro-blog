@@ -5,6 +5,7 @@ import { eq } from "drizzle-orm"
 import { userInfoTable } from "@/schemas/drizzle"
 import { NewUserInfo } from "@/db/types"
 import { userInfoSchema } from "@/schemas/validations"
+import { revalidatePath } from "next/cache"
 
 export const updateUserInfo = async (data: NewUserInfo) => {
   try {
@@ -28,5 +29,7 @@ export const updateUserInfo = async (data: NewUserInfo) => {
   } catch (err) {
     console.error("Error saving user info:", err)
     throw new Error("Failed to save user info")
+  } finally {
+    revalidatePath("/")
   }
 }

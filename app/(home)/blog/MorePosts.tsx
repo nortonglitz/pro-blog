@@ -25,7 +25,7 @@ export const MorePosts = () => {
       if (newPosts.length > 0) {
         setPosts(oldPosts => [...(oldPosts || []), ...newPosts])
       }
-    } catch (err) {
+    } catch {
       if (process.env.NODE_ENV === "development") {
         console.error("Failed to fetch new posts")
       }

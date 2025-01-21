@@ -6,7 +6,7 @@ import { IconFileOff, IconHelp } from "@tabler/icons-react"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import { useZodForm } from "@/hooks"
-import { newPostSchema } from "@/schemas/validations"
+import { newPostSchema, NewPostSchema } from "@/schemas/validations"
 import { editPost, getPostById } from "@/db/actions/posts"
 import toast from "react-hot-toast"
 import { useParams } from "next/navigation"
@@ -51,18 +51,6 @@ export default function EditPostPage() {
   const id = Number(params.id)
   const [isLoading, setIsLoading] = useState(true)
 
-  if (isNaN(id)) {
-    return (
-      <div className="flex flex-col items-center">
-        <IconFileOff
-          size="10rem"
-          stroke={0.5}
-        />
-        <h1 className="text-xl">Invalid post ID</h1>
-      </div>
-    )
-  }
-
   const [deltaOps, setDeltaOps] = useState<Op[]>([])
   const quillRef = useRef<Quill | null>(null)
 
@@ -93,9 +81,9 @@ export default function EditPostPage() {
     }
 
     fetchPost()
-  }, [id])
+  }, [id, reset, setValue])
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: NewPostSchema) => {
     console.log(data)
     try {
       setIsLoading(true)
@@ -114,6 +102,18 @@ export default function EditPostPage() {
     } finally {
       setIsLoading(false)
     }
+  }
+
+  if (isNaN(id)) {
+    return (
+      <div className="flex flex-col items-center">
+        <IconFileOff
+          size="10rem"
+          stroke={0.5}
+        />
+        <h1 className="text-xl">Invalid post ID</h1>
+      </div>
+    )
   }
 
   return (

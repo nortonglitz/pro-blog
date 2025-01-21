@@ -13,7 +13,7 @@ export default function Messages() {
       try {
         const data = await getMessages()
         setMessages(data)
-      } catch (err) {
+      } catch {
         if (process.env.NODE_ENV === "development") {
           console.error("Error fetching messages")
         }

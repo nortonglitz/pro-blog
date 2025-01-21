@@ -14,7 +14,7 @@ export default function PersonalInfo() {
       try {
         const data = await getUserInfo()
         setUserInfo(data)
-      } catch (err) {
+      } catch {
         if (process.env.NODE_ENV === "development") {
           console.error("Error fetching user info")
         }

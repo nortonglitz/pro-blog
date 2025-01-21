@@ -1,7 +1,5 @@
 import Link from "next/link"
 import { BlogCard } from "../BlogCard"
-import { InputText } from "@/components"
-import { IconSearch, IconX } from "@tabler/icons-react"
 import { getPosts } from "@/db/actions/posts"
 import { extractTextFromDeltaOps } from "@/libs/quill"
 import { MorePosts } from "./MorePosts"

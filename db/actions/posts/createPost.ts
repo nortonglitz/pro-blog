@@ -3,6 +3,7 @@
 import db from "@/db"
 import { postsTable } from "@/schemas/drizzle"
 import { NewPost } from "@/db/types"
+import { revalidatePath } from "next/cache"
 
 export const createPost = async (newPost: NewPost) => {
   try {
@@ -19,5 +20,8 @@ export const createPost = async (newPost: NewPost) => {
   } catch (err) {
     console.error("Error creating post:", err)
     throw new Error("Failed to create post")
+  } finally {
+    revalidatePath("/")
+    revalidatePath("/blog")
   }
 }

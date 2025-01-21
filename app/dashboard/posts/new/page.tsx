@@ -6,10 +6,10 @@ import { IconHelp } from "@tabler/icons-react"
 import Link from "next/link"
 import { useRef, useState } from "react"
 import { useZodForm } from "@/hooks"
-import { newPostSchema } from "@/schemas/validations"
+import { newPostSchema, NewPostSchema } from "@/schemas/validations"
 import { createPost } from "@/db/actions/posts"
 import toast from "react-hot-toast"
-import { Op } from "quill"
+import Quill, { Op } from "quill"
 
 const TIPS = {
   thumbnail:
@@ -47,7 +47,7 @@ const InputLabel = ({ children, htmlFor, title, tip }: InputLabelProps) => {
 export default function NewPost() {
   const [isLoading, setIsLoading] = useState(false)
   const [deltaOps, setDeltaOps] = useState<Op[]>()
-  const quillRef = useRef<any | null>(null)
+  const quillRef = useRef<Quill | null>(null)
 
   const {
     register,
@@ -58,12 +58,12 @@ export default function NewPost() {
     schema: newPostSchema
   })
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: NewPostSchema) => {
     try {
       setIsLoading(true)
       const deltaData = {
         ...data,
-        content: deltaOps
+        content: deltaOps as Op[]
       }
       await createPost(deltaData)
       toast.success("Post created")
