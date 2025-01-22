@@ -1,5 +1,7 @@
 "use client"
 
+import { logout } from "@/auth/actions/logout"
+import { Button } from "@/components/UI"
 import {
   IconBook,
   IconId,
@@ -7,7 +9,8 @@ import {
   IconSettings,
   IconDashboard,
   IconMenu2,
-  IconX
+  IconX,
+  IconLogout2
 } from "@tabler/icons-react"
 import clsx from "clsx"
 import Link from "next/link"
@@ -86,6 +89,17 @@ export const MenuMobile = () => {
             ))}
           </ul>
         </nav>
+        <Button
+          className="flex px-10 py-5 text-xl gap-2 w-full justify-center mt-20"
+          variant="ghost"
+          color="error"
+          onClick={() => logout()}
+        >
+          <div className="flex gap-2 items-center w-40">
+            <IconLogout2 />
+            Logout
+          </div>
+        </Button>
       </section>
     </>
   )
