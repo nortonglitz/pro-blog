@@ -8,7 +8,7 @@ export const USER_CREDENTIALS = {
 
 const EXPIRES_IN = {
   jwt: {
-    access: "15s",
+    access: "15m",
     refresh: "7d"
   },
   cookie: {
