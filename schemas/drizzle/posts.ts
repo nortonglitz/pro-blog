@@ -6,6 +6,6 @@ export const postsTable = pgTable("posts", {
   image_url: varchar({ length: 255 }).notNull(),
   title: varchar({ length: 100 }).notNull(),
   content: jsonb().$type<Op[]>().notNull(),
-  updated_at: timestamp().defaultNow().notNull(),
+  updated_at: timestamp().$onUpdate(() => new Date()),
   created_at: timestamp().defaultNow().notNull()
 })

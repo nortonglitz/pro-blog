@@ -7,6 +7,6 @@ export const userInfoTable = pgTable("user_info", {
   jobs: jsonb("jobs").$type<string[]>().notNull(), // Lista de trabalhos
   socials: jsonb().$type<Record<string, string>>().notNull(), // Links de redes sociais
   about: text().notNull(), // Texto sobre o usuário
-  updated_at: timestamp().defaultNow().notNull(),
+  updated_at: timestamp().$onUpdate(() => new Date()),
   created_at: timestamp().defaultNow().notNull()
 })
