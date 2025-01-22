@@ -3,9 +3,18 @@
 import clsx from "clsx"
 
 import { usePathname } from "next/navigation"
-import { IconId, IconSettings, IconMessage, IconBook, IconDashboard } from "@tabler/icons-react"
+import {
+  IconId,
+  IconSettings,
+  IconMessage,
+  IconBook,
+  IconDashboard,
+  IconLogout2
+} from "@tabler/icons-react"
 import Link from "next/link"
 import { MenuMobile } from "./MenuMobile"
+import { Button } from "@/components/UI"
+import { logout } from "@/auth/actions/logout"
 
 export const LINKS = [
   { label: "Personal info", href: "/dashboard/personal-info", icon: IconId },
@@ -31,22 +40,33 @@ export const Navigation = () => {
             <span className="w-fit">Dashboard</span>
           </h1>
         </header>
-        <ul>
-          {LINKS.map(({ href, label, icon: Icon }) => (
-            <li key={`${label}-link`}>
-              <Link
-                href={href}
-                className={clsx(
-                  pathname.includes(href) ? "bg-neutral-950" : "hover:bg-neutral-800",
-                  "cursor-pointer flex items-center gap-5 h-full pl-5 py-4 text-lg"
-                )}
-              >
-                <Icon stroke={1.5} />
-                {label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <section className="flex flex-col h-full justify-between">
+          <ul>
+            {LINKS.map(({ href, label, icon: Icon }) => (
+              <li key={`${label}-link`}>
+                <Link
+                  href={href}
+                  className={clsx(
+                    pathname.includes(href) ? "bg-neutral-950" : "hover:bg-neutral-800",
+                    "cursor-pointer flex items-center gap-5 h-full pl-5 py-4 text-lg"
+                  )}
+                >
+                  <Icon stroke={1.5} />
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <Button
+            className="flex pl-5 py-4 text-lg gap-5"
+            variant="ghost"
+            color="error"
+            onClick={() => logout()}
+          >
+            <IconLogout2 />
+            Logout
+          </Button>
+        </section>
       </aside>
     </>
   )

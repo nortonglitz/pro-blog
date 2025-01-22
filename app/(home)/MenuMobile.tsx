@@ -2,12 +2,18 @@
 
 import { IconSocialLink } from "@/components"
 import { SocialMedia } from "@/components/icons"
-import { USER_CONTENT, LINKS } from "@/content"
+import { LINKS } from "@/content"
+import { UserInfo } from "@/db/types"
 import { IconMenu2, IconX } from "@tabler/icons-react"
+import clsx from "clsx"
 import Link from "next/link"
 import { useState } from "react"
 
-export const MenuMobile = () => {
+type MenuMobileProps = {
+  userInfo: UserInfo
+}
+
+export const MenuMobile = ({ userInfo }: MenuMobileProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeLink, setActiveLink] = useState(LINKS[0])
   const linksId = LINKS.map(title => title.replace(" ", "-").toLocaleLowerCase())
@@ -38,7 +44,7 @@ export const MenuMobile = () => {
       >
         <Link href="/">
           <span className="text-3xl font-jura font-bold text-emerald-500 select-none">
-            {USER_CONTENT.name.split(" ").map(name => name.charAt(0))}
+            {userInfo.first_name.charAt(0) + userInfo.last_name.charAt(0)}
           </span>
         </Link>
         <button onClick={() => setIsOpen(true)}>
@@ -68,23 +74,23 @@ export const MenuMobile = () => {
         >
           <IconX size="2rem" />
         </button>
-        <header className="px-4 mx-auto relative">
-          {USER_CONTENT.name.split(" ").map((name, i) => (
-            <h3
-              key={`name-title-${i}`}
-              className="
-                text-4xl
-                font-jura
-                w-44
-
-                first:text-left
-                last:text-right
-              "
-            >
-              <span className="text-emerald-500 font-semibold">{name[0]}</span>
-              {name.slice(1)}
+        <header
+          className={clsx(
+            "px-4 mx-auto",
+            "[&_h3]:text-3xl [&_h3]:font-jura [&_h3]:text-nowrap",
+            "[&_span]:text-emerald-500 [&_span]:font-semibold"
+          )}
+        >
+          <Link href="/">
+            <h3 className="mr-[2ch]">
+              <span>{userInfo?.first_name[0]}</span>
+              {userInfo?.first_name.slice(1)}
             </h3>
-          ))}
+            <h3 className="ml-[2ch] text-right">
+              <span>{userInfo?.last_name[0]}</span>
+              {userInfo?.last_name.slice(1)}
+            </h3>
+          </Link>
         </header>
         <nav>
           <ul>
@@ -117,7 +123,7 @@ export const MenuMobile = () => {
           </ul>
         </nav>
         <footer className="flex justify-center gap-8 h-32">
-          {Object.entries(USER_CONTENT.socials).map(([social, link], i) => {
+          {Object.entries(userInfo.socials).map(([social, link], i) => {
             return (
               <IconSocialLink
                 social={social as SocialMedia}

@@ -68,7 +68,7 @@ export const Button = ({
       {...props}
     >
       {loading ? (
-        <span className={clsx("flex items-center", loading && children && "gap-4")}>
+        <span className={clsx("flex items-center justify-center", loading && children && "gap-4")}>
           <Spinner />
           {children}
         </span>
