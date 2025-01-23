@@ -18,11 +18,8 @@ export const protectRouteMiddleware = async (request: NextRequest) => {
     }
 
     if (process.env.NODE_ENV === "development") {
-      console.group("MiddlewareFunctionError")
-      console.error("protectRoute")
-      console.error(err)
-      console.groupEnd()
+      console.error("protectRoute middleware error:", err)
     }
+    return NextResponse.redirect(new URL("/auth/login", request.url))
   }
-  return NextResponse.redirect(new URL("/auth/login", request.url))
 }
