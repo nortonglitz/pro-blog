@@ -1,7 +1,7 @@
 import clsx from "clsx"
 import { Spinner } from "./Spinner"
 
-const baseStyles = "transition-all active:scale-95"
+const baseStyles = "transition-all"
 const disabledStyles = "disabled:opacity-50 disabled:cursor-not-allowed"
 
 const styles = {
@@ -61,7 +61,7 @@ export const Button = ({
         baseStyles,
         sizeStyles[size],
         styles[variant][color],
-        disabledStyles,
+        disabled || loading ? disabledStyles : "active:scale-95",
         className
       )}
       disabled={disabled || loading}
