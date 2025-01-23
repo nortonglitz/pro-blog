@@ -2,13 +2,16 @@
 
 import { Button, InputText } from "@/components/UI"
 import { IconDashboard } from "@tabler/icons-react"
-import { useZodForm } from "@/hooks"
+import { useRecaptcha, useZodForm } from "@/hooks"
 import { loginFormSchema, LoginFormSchema } from "@/schemas/validations"
 import { login } from "@/auth/actions/login"
 import { useState } from "react"
 import toast from "react-hot-toast"
+import { validateRecaptcha } from "@/services/google-recaptcha/actions"
+import { RecaptchaError } from "@/services/google-recaptcha/error"
 
 export default function Login() {
+  const { executeRecaptcha } = useRecaptcha("login")
   const [isLoading, setIsLoading] = useState(false)
   const {
     register,
@@ -17,12 +20,29 @@ export default function Login() {
   } = useZodForm({ schema: loginFormSchema })
 
   const onSubmit = async (formData: LoginFormSchema) => {
-    setIsLoading(true)
-    const isValid = await login(formData)
-    if (!isValid) {
-      toast.error("Invalid credentials")
+    try {
+      setIsLoading(true)
+      const token = await executeRecaptcha()
+      if (!token) {
+        if (process.env.NODE_ENV === "development") {
+          console.error("Could not generate reCAPTCHA token")
+        }
+        return
+      }
+      await validateRecaptcha(token)
+      const isValid = await login(formData)
+      if (!isValid) {
+        toast.error("Invalid credentials")
+      }
+    } catch (err) {
+      if (err instanceof RecaptchaError) {
+        if (process.env.NODE_ENV === "development") {
+          console.error(`Erro no reCAPTCHA (${err.code}): ${err.message}`)
+        }
+      }
+    } finally {
+      setIsLoading(false)
     }
-    setIsLoading(false)
   }
 
   return (
