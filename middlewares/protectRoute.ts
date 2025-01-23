@@ -8,6 +8,9 @@ const { accessCookieConfig } = cookieConfig
 export const protectRouteMiddleware = async (request: NextRequest) => {
   const accessToken = request.cookies.get(accessCookieConfig.name)?.value
   try {
+    if (!accessToken) {
+      return NextResponse.redirect(new URL("/auth/login", request.url))
+    }
     if (accessToken) {
       await verifyAccessToken(accessToken)
       return NextResponse.next()
@@ -18,10 +21,7 @@ export const protectRouteMiddleware = async (request: NextRequest) => {
     }
 
     if (process.env.NODE_ENV === "development") {
-      console.group("MiddlewareFunctionError")
-      console.error("protectRoute")
-      console.error(err)
-      console.groupEnd()
+      console.error("protectRoute middleware error:", err)
     }
   }
   return NextResponse.redirect(new URL("/auth/login", request.url))

@@ -5,6 +5,9 @@ import { cookieConfig } from "@/auth/config"
 import { AuthenticationPayload } from "@/auth/types"
 
 export async function GET(request: NextRequest) {
+  if (request.nextUrl.pathname === "/api/auth/refresh") {
+    return NextResponse.redirect(new URL("/auth/login", request.url))
+  }
   const cookieStore = await cookies()
 
   const { refreshCookieConfig, accessCookieConfig } = cookieConfig
@@ -12,7 +15,7 @@ export async function GET(request: NextRequest) {
   const refreshToken = cookieStore.get(refreshCookieConfig.name)?.value
 
   if (!refreshToken) {
-    return NextResponse.redirect(new URL("/", request.url))
+    return NextResponse.redirect(new URL("/auth/login", request.url))
   }
 
   try {
@@ -26,6 +29,9 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.redirect(request.url)
   } catch {
-    return NextResponse.json({ error: "Invalid refresh token" }, { status: 401 })
+    if (process.env.NODE_ENV === "development") {
+      console.error("api/auth/refresh: Invalid refresh token")
+    }
+    return NextResponse.redirect(new URL("/auth/login", request.url))
   }
 }

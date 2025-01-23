@@ -18,10 +18,7 @@ export const authRouteMiddleware = async (request: NextRequest) => {
       return NextResponse.rewrite(new URL("/api/auth/refresh", request.url))
     }
     if (process.env.NODE_ENV === "development") {
-      console.group("MiddlewareFunctionError")
-      console.error("avoidAuth")
-      console.error(err)
-      console.groupEnd()
+      console.error("authRoute middleware error:", err)
     }
   }
   return NextResponse.next()
