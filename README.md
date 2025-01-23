@@ -17,6 +17,7 @@ Pro Blog é um projeto para criação e gerenciamento de posts através de um pa
 - **Editor de Texto:** [Quill](https://quilljs.com/)
 - **Banco de Dados:** [PostgreSQL](https://www.postgresql.org/)
 - **ORM:** [Drizzle](https://orm.drizzle.team/)
+- **reCAPTCHA** [Google reCAPTCHA](https://developers.google.com/recaptcha)
 
 ## 📂 Estrutura do Projeto
 
@@ -35,9 +36,9 @@ O projeto está dividido em duas áreas principais:
 - [x] Exibir posts publicados na página pública do blog.
 - [x] Interface simples e funcional do painel de controle.
 - [x] Personalizar o título, descrição do profisisonal, suas redes sociais e meta dados.
-
-### Em Desenvolvimento
-
-- [ ] Sistema de autenticação para proteger o acesso ao painel controle.
-- [ ] Possibilidade de inserir imagem no posts.
-- [ ] Inserir recaptcha no formulário de contato
+- [x] Sistema de autenticação para proteger o acesso ao painel controle.
+- [x] Inserir recaptcha no formulário de contato e login para segurança contra bots.
+- [x] Leitura de mensagens e feedback de quando foi lido.
+- [x] Validação de todos os formulários com zod.
+- [x] Implementação de seeds para avalição.
+- [x] Criação de UI simples e responsiva.
