@@ -1,13 +1,16 @@
 "use client"
 
 import { Button, InputText, TextArea } from "@/components"
-import { useZodForm } from "@/hooks"
+import { useRecaptcha, useZodForm } from "@/hooks"
 import { sendMessageSchema, SendMessageSchema } from "@/schemas/validations"
 import { useState } from "react"
 import { sendMessage } from "@/db/actions/messages"
 import { IconMailCheck } from "@tabler/icons-react"
+import { validateRecaptcha } from "@/services/google-recaptcha/actions"
+import { RecaptchaError } from "@/services/google-recaptcha/error"
 
 export const Form = () => {
+  const { executeRecaptcha } = useRecaptcha("contact")
   const [isLoading, setIsLoading] = useState(false)
   const [messageSent, setMessageSent] = useState(false)
 
@@ -22,11 +25,21 @@ export const Form = () => {
   const onSubmit = async (formData: SendMessageSchema) => {
     try {
       setIsLoading(true)
+      const token = await executeRecaptcha()
+      if (!token) {
+        if (process.env.NODE_ENV === "development") {
+          console.error("Could not generate reCAPTCHA token")
+        }
+        return
+      }
+      await validateRecaptcha(token)
       await sendMessage(formData)
       setMessageSent(true)
     } catch (err) {
-      if (process.env.NODE_ENV === "development") {
-        console.error("Error sending message:", err)
+      if (err instanceof RecaptchaError) {
+        if (process.env.NODE_ENV === "development") {
+          console.error(`Erro no reCAPTCHA (${err.code}): ${err.message}`)
+        }
       }
     } finally {
       setIsLoading(false)
