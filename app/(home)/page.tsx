@@ -78,7 +78,7 @@ export default async function Home() {
           </Link>
         </div>
         <Image
-          className="h-auto w-64 border border-emerald-950 bg-white/5"
+          className="w-auto h-96 border border-emerald-950 bg-white/5"
           src="/personal.png"
           width={1141}
           height={2177}
