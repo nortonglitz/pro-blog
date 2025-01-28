@@ -1,11 +1,12 @@
-# Pro Blog
+# 🖋️ Pro Blog
 
-Pro Blog é um projeto para criação e gerenciamento de posts através de um painel administrativo e a visualização de conteúdos em um blog público. Ambos com responsividade para diferentes telas de dispositivos.
+Pro Blog é um projeto de um blog profissional e painel de controle para gerenciamento de posts, personalização do conteúdo e recebimento de mensagens. Ambos com responsividade para diferentes telas de dispositivos.
 
 ## 🚀 Demonstração
 
 - **Blog:** [https://pro-blog-bice.vercel.app/blog](https://pro-blog-bice.vercel.app/blog)
 - **Dashboard:** [https://pro-blog-bice.vercel.app/dashboard](https://pro-blog-bice.vercel.app/dashboard)
+  Para acessar o painel utilize as credenciais (`admin/123456`)
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -17,7 +18,8 @@ Pro Blog é um projeto para criação e gerenciamento de posts através de um pa
 - **Editor de Texto:** [Quill](https://quilljs.com/)
 - **Banco de Dados:** [PostgreSQL](https://www.postgresql.org/)
 - **ORM:** [Drizzle](https://orm.drizzle.team/)
-- **reCAPTCHA** [Google reCAPTCHA](https://developers.google.com/recaptcha)
+- **Google reCAPTCHA** [Google reCAPTCHA](https://developers.google.com/recaptcha)
+- **Criptografia**: [jose](https://github.com/panva/jose)
 
 ## 📂 Estrutura do Projeto
 
